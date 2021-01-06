@@ -1,29 +1,6 @@
-# pizzaphonic
+# Pizzaphonic
 
-## Project setup
-```
-npm install
-```
+![pizzaphonic](https://user-images.githubusercontent.com/3426213/103703928-b97cdc80-4fa8-11eb-887b-5ac19a2e55df.png)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Prod: https://pizzaphonic.com/
+- Pre-prod: https://dev.pizzaphonic.com/
