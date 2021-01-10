@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Play</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app-content">
+      <router-view />
     </div>
-    <router-view />
+    <footer>
+      <div>
+        © 2021 - <a href="https://twitter.com/kibwashere" target="_blank">@kibwashere</a>
+      </div>
+    </footer>
   </div>
 </template>
 
