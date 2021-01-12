@@ -1,21 +1,30 @@
 <template>
-  <div>
-    <div class="top-banner">
-        <a href="">
-            <img alt="Pizzaphonic" src="../assets/pp-only.png" />
-        </a>
+  <div class="menus">
+    <MenusHeader />
+    <div class="menu-content">
+        <router-view />
     </div>
-    <router-view />
   </div>
 </template>
 
-<style lang="scss">
-.top-banner {
-    padding: 10px 20px;
-    border-bottom: 1px solid white;
+<script>
+import MenusHeader from '@/components/Banners/MenusHeader.vue'
 
-    img {
-        height: 40px;
-    }
+export default {
+  components: {
+    MenusHeader
+  }
+}
+</script>
+
+<style lang="scss">
+.menus {
+    height: 100%;
+}
+.menu-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

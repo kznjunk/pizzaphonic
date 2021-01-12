@@ -1,6 +1,14 @@
 $main-text-color: white;
-$main-link-color: red;
 $main-background-color: black;
+
+$blue-color: rgb(48, 118, 197);
+$red-color: red;
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
 
 body {
     margin: 0;
@@ -9,6 +17,10 @@ body {
 }
 
 a {
-    color: $main-link-color;
+    color: $red-color;
+    text-decoration: underline;
+}
+
+.menu-title {
     text-decoration: underline;
 }
