@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Pizzaphonic" src="../assets/pp.png" />
     <h2>Are you gamer enough..?</h2>
-    <div>
+    <div class="home-menus">
       <MenusButton
         text="RULES"
         target="/rules"
@@ -37,6 +37,11 @@ export default {
 
 <style lang="scss">
 .home {
-  padding: 30px 10px;
+    padding: 0px 10px;
+    height: calc(100% - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 </style>
