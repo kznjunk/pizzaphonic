@@ -11,10 +11,6 @@
         text="LEADERBOARD"
         target="/leaderboard"
       />
-      <MenusButton
-        text="CREDITS"
-        target="/credits"
-      />
       <br/>
       <MenusButton
         text="PLAY"

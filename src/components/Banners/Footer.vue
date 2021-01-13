@@ -15,5 +15,6 @@ footer {
   font-weight: bold;
   padding: 10px 10px;
   border-top: 1px solid white;
+  background-color: black;
 }
 </style>

@@ -1,0 +1,42 @@
+<template>
+    <div id="inputAnswer">
+        <div>
+            <input ng-model='userAnswer' id="answer" type="" name="" placeholder="Type your answer"/>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+  props: {
+    text: String,
+    target: String,
+    color: String
+  }
+}
+</script>
+
+<style scoped lang="scss">
+#inputAnswer {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+#inputAnswer > div {
+  text-align: center;
+}
+#inputAnswer > div input {
+  border: none;
+  border-top: 1px solid rgb(51, 153, 255);
+  border-bottom: 1px solid rgb(51, 153, 255);
+  background-color: #101012;
+  color: white;
+  width: 100%;
+  height: 51px;
+  text-align: center;
+  font-size: 22px;
+}
+</style>
