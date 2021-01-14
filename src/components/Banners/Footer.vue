@@ -14,7 +14,7 @@ footer {
   font-size: 12px;
   font-weight: bold;
   padding: 10px 10px;
-  border-top: 1px solid white;
+  border-top: 1px solid $blue-color;
   background-color: black;
 }
 </style>

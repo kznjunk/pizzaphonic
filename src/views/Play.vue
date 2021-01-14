@@ -1,6 +1,7 @@
 <template>
   <div class="play">
         <GameBackground />
+        <PlayHeader />
         <!-- OVERLAY -->
         <div class="pageOverlay">
             <div class="correctAnswer displayNone" ng-class="currentOverlay === 1 && lifes > 0 ? '' : 'displayNone'"></div>
@@ -39,15 +40,12 @@
                         <div class="rounds"></div>
                         <br/>
                         <br/>
-                        <a ng-class="finalSoundFound === true ? '' : 'displayNone'" class="award" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Nice, here your award!</a>
+                        <!-- <a ng-class="finalSoundFound === true ? '' : 'displayNone'" class="award" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Nice, here your award!</a> -->
                     </div>
                 </div>
                 <!-- END OF LEFT BOARD -->
                 <!-- RIGHT BOARD -->
                 <div class="rightBoard">
-                    <div class="rightLife">
-                            <img ng-repeat="i in getNumber(5) track by $index" ng-src="$index < lifes ? 'img/lifeY.png' : 'img/lifeN.png'" alt="life"/>
-                    </div>
                     <div class="rightScore" ng-if="numberOfPizza > 0">
                           youGotIt.length / numberOfPizza &#9834;
                     </div>
@@ -79,11 +77,13 @@
 </template>
 
 <script>
+import PlayHeader from '@/components/Banners/PlayHeader.vue'
 import GameBackground from '@/components/Images/GameBackground.vue'
 import GameAnswerInput from '@/components/Inputs/GameAnswerInput.vue'
 
 export default {
   components: {
+    PlayHeader,
     GameBackground,
     GameAnswerInput
   }

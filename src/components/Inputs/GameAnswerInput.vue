@@ -19,7 +19,7 @@ export default {
 <style scoped lang="scss">
 #inputAnswer {
   position: absolute;
-  bottom: 40px;
+  bottom: 36px;
   left: 0;
   right: 0;
   width: 100%;
@@ -30,13 +30,15 @@ export default {
 }
 #inputAnswer > div input {
   border: none;
-  border-top: 1px solid rgb(51, 153, 255);
-  border-bottom: 1px solid rgb(51, 153, 255);
+  border-top: 1px solid $blue-color;
+  border-bottom: 1px solid $blue-color;
   background-color: #101012;
   color: white;
   width: 100%;
   height: 51px;
   text-align: center;
   font-size: 22px;
+}
+#inputAnswer > div input:focus {
 }
 </style>
