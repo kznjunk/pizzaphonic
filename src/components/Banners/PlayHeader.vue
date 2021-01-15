@@ -1,12 +1,10 @@
 <template>
     <div class="play-header">
         <div class="left-side">
-            <MenusPrevious target="/" />
+            <PlayQuit target="/" />
         </div>
         <div class="play-header-logo">
-            <router-link to="/">
-                <img alt="Pizzaphonic" src="@/assets/pp-only.png" />
-            </router-link>
+            < 5. Best Soundtrack >
         </div>
         <div class="right-side">
             <GameLife />
@@ -20,12 +18,12 @@
 
 <script>
 import GameLife from "@/components/Images/GameLife.vue"
-import MenusPrevious from "@/components/Buttons/MenusPrevious.vue"
+import PlayQuit from "@/components/Buttons/PlayQuit.vue"
 
 export default {
   components: {
     GameLife,
-    MenusPrevious
+    PlayQuit
   }
 }
 </script>
@@ -50,7 +48,7 @@ export default {
         align-items: center;
         justify-content: center;
     }
-    .play-header-logo img {
+    .play-header-logo {
         height: 40px;
     }
     .right-side {

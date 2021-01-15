@@ -35,11 +35,7 @@
                 <div class="leftBoard">
                     <div class="leftMainLogo">
                         <img src="img/pp.png" alt=""/>
-                        <br/>
-                        <br/>
                         <div class="rounds"></div>
-                        <br/>
-                        <br/>
                         <!-- <a ng-class="finalSoundFound === true ? '' : 'displayNone'" class="award" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Nice, here your award!</a> -->
                     </div>
                 </div>
@@ -52,19 +48,6 @@
                 </div>
                 <!-- END OF RIGHT BOARD -->
                 <!-- Pizza -->
-                <div class="pizza">
-                    <div class="pizzaPrevious" ng-class="indexActiveSlide === 1 ? 'displayNone' : ''" ng-click="slidePreviousClicked()"> &#8249; </div>
-                    <div ng-repeat="(i, sound10) in sounds" ng-if="!$first" class="line" ng-class="{'activeSlide': i == indexActiveSlide}">
-                        <div class="currentRound" ng-if="i === 15">Final round!</div>
-                        <div class="currentRound" ng-if="i < 15">Round {{i}}</div><br/>
-                        <div ng-repeat="(j, sound) in sound10" ng-if="!$first" class="pizza" ng-click="pizzaClicked($event, sound)">
-                            <div class="circle" ng-class="sound.diff">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pizzaNext" ng-click="slideNextClicked()"> &#8250; </div>
-                </div>
                 <!-- END OF Pizza -->
                 <!-- LOADING PIZZA -->
                 <div class="loadingPizza"></div>
