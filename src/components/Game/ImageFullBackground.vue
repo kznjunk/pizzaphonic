@@ -18,7 +18,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  // background-image: url('~@/assets/bg.jpg');
+  background-image: url('~@/assets/bg.jpg');
   position: fixed;
   width: 100%;
   height: 100%;

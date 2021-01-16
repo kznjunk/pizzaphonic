@@ -1,6 +1,6 @@
 <template>
   <div class="menus">
-    <MenusHeader />
+    <Header />
 
     <div class="menu-content">
         <router-view />
@@ -8,12 +8,13 @@
   </div>
 </template>
 
+
 <script>
-import MenusHeader from '@/components/Banners/MenusHeader.vue'
+import Header from '@/components/Home/Header.vue'
 
 export default {
   components: {
-    MenusHeader
+    Header
   }
 }
 </script>

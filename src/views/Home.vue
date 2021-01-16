@@ -3,16 +3,16 @@
     <img alt="Pizzaphonic" src="../assets/pp.png" />
     <h2>Are you gamer enough..?</h2>
     <div class="home-menus">
-      <MenusButton
+      <ButtonMenu
         text="RULES"
         target="/rules"
       />
-      <MenusButton
+      <ButtonMenu
         text="LEADERBOARD"
         target="/leaderboard"
       />
       <br/>
-      <MenusButton
+      <ButtonMenu
         text="PLAY"
         target="/login"
         color="red"
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import MenusButton from "@/components/Buttons/MenusButton.vue"
+import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
 export default {
   components: {
-    MenusButton
+    ButtonMenu
   }
 }
 </script>

@@ -44,4 +44,22 @@ img:nth-child(5) {
     z-index: 5;
     margin-top: 12px;
 }
+@media screen and (max-width: 1000px) {
+    img {
+        width: 20px;
+        margin: 0px 3px;
+    }
+    img:nth-child(1) {
+    }
+    img:nth-child(2) {
+    margin-left: -24px;
+    }
+    img:nth-child(3) {
+    }
+    img:nth-child(4) {
+    margin-left: 29px;
+    }
+    img:nth-child(5) {
+    }
+}
 </style>

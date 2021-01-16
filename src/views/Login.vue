@@ -2,7 +2,7 @@
   <div class="login">
     <div>
         <div>
-            <MenusButton
+            <ButtonMenu
                 text="GUEST MODE"
                 target="/play"
             />
@@ -13,7 +13,7 @@
         <div class="form-ranked">
             <input id="pseudo" type="pseudo" name="pseudo" placeholder="Your pseudo" class="subscribeInput"/>
             <input d="email" type="email" name="email" placeholder="Your email" class="subscribeInput"/>
-            <MenusButton
+            <ButtonMenu
                 text="RANKED MODE"
                 target="/play"
                 color="red"
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import MenusButton from "@/components/Buttons/MenusButton.vue"
+import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
 export default {
   components: {
-    MenusButton
+    ButtonMenu
   }
 }
 </script>

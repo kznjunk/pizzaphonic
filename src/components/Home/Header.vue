@@ -1,7 +1,7 @@
 <template>
     <div class="top-banner">
         <div class="previous">
-            <MenusPrevious target="/" />
+            <IconPrevious target="/" />
         </div>
         <div>
             <router-link to="/">
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import MenusPrevious from "@/components/Buttons/MenusPrevious.vue"
+import IconPrevious from "@/components/Home/IconPrevious.vue"
 
 export default {
   components: {
-    MenusPrevious
+    IconPrevious
   }
 }
 </script>

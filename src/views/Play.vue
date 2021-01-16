@@ -1,8 +1,8 @@
 <template>
   <div class="play">
-        <GameBackground />
-        <PlayHeader />
-        <!-- OVERLAY -->
+        <ImageFullBackground />
+        <Header />
+        <!-- OVERLAY
         <div class="pageOverlay">
             <div class="correctAnswer displayNone" ng-class="currentOverlay === 1 && lifes > 0 ? '' : 'displayNone'"></div>
             <div class="finalAnswer displayNone" ng-class="currentOverlay === 2 && lifes > 0 ? '' : 'displayNone'">
@@ -19,56 +19,45 @@
                 </div>
                 <div class="resetButton" >Try again</div>
             </div>
-        </div>
+        </div> -->
         <!-- END OF THE OVERLAY -->
         <!-- SUCH GREAT VISUAL -->
-        <div class="visual">
-            <div>
-                <div class="aSound" ng-repeat="n in visuelElements(20)" style="heigh:divFreqHeightpx"></div>
-            </div>
-        </div>
+        <ButtonSound />
         <!-- END OF THE SUCH GREAT VISUAL -->
-        <!-- MAIN CONTENT -->
+        <!-- MAIN CONTENT
         <div class="page">
             <div class="content">
-                <!-- LEFT BOARD -->
-                <div class="leftBoard">
-                    <div class="leftMainLogo">
-                        <img src="img/pp.png" alt=""/>
-                        <div class="rounds"></div>
-                        <!-- <a ng-class="finalSoundFound === true ? '' : 'displayNone'" class="award" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Nice, here your award!</a> -->
-                    </div>
-                </div>
-                <!-- END OF LEFT BOARD -->
-                <!-- RIGHT BOARD -->
-                <div class="rightBoard">
-                    <div class="rightScore" ng-if="numberOfPizza > 0">
-                          youGotIt.length / numberOfPizza &#9834;
-                    </div>
-                </div>
-                <!-- END OF RIGHT BOARD -->
-                <!-- Pizza -->
-                <!-- END OF Pizza -->
-                <!-- LOADING PIZZA -->
+                LOADING PIZZA
                 <div class="loadingPizza"></div>
-                <!-- END OF LOADING PIZZA -->
+                END OF LOADING PIZZA
             </div>
         </div>
-        <!-- END OF MAIN CONTENT -->
-        <GameAnswerInput />
+        END OF MAIN CONTENT -->
+        <InputAnswer />
   </div>
 </template>
 
 <script>
-import PlayHeader from '@/components/Banners/PlayHeader.vue'
-import GameBackground from '@/components/Images/GameBackground.vue'
-import GameAnswerInput from '@/components/Inputs/GameAnswerInput.vue'
+import ImageFullBackground from '@/components/Game/ImageFullBackground.vue'
+import Header from '@/components/Game/Header.vue'
+import ButtonSound from '@/components/Game/ButtonSound.vue'
+import InputAnswer from '@/components/Game/InputAnswer.vue'
 
 export default {
   components: {
-    PlayHeader,
-    GameBackground,
-    GameAnswerInput
+    ImageFullBackground,
+    Header,
+    ButtonSound,
+    InputAnswer
   }
 }
 </script>
+
+<style scoped lang="scss">
+.play {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

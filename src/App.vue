@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Footer from '@/components/Banners/Footer.vue'
+import Footer from '@/components/Home/Footer.vue'
 
 export default {
   components: {
