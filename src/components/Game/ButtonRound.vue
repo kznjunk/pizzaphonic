@@ -2,9 +2,9 @@
     <div class="round-content">
         <button @click="changeRound('prev')"><</button>
         <span class="round-name" v-bind:class="{ 'active': currRound === 1 }" data-round="1">1. Best Soundtrack</span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 2 }" data-round="2">2. Best Soundtrack</span>
+        <span class="round-name" v-bind:class="{ 'active': currRound === 2 }" data-round="2">2. Best </span>
         <span class="round-name" v-bind:class="{ 'active': currRound === 3 }" data-round="3">3. Best Soundtrack</span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 4 }" data-round="4">4. Best Soundtrack</span>
+        <span class="round-name" v-bind:class="{ 'active': currRound === 4 }" data-round="4">4. Best </span>
         <span class="round-name" v-bind:class="{ 'active': currRound === 5 }" data-round="5">5. Best Soundtrack</span>
         <button @click="changeRound('next')">></button>
     </div>
@@ -22,6 +22,12 @@ export default {
       currRound: 1
     }
   },
+    created() {
+        document.addEventListener('keyup', this.doCommand)
+    },
+    destroyed() {
+        document.removeEventListener('keyup', this.doCommand)
+    },
   methods: {
     changeRound (wayToGo) {
         const isPrev = wayToGo === 'prev'
@@ -31,6 +37,18 @@ export default {
         if (isValidWay) {
             isPrev ? this.currRound-- : this.currRound++
             EventBus.$emit('roundChanged', { wayToGo, currRound: this.currRound })
+        }
+    },
+    doCommand(e) {
+        const currTarget = e.target
+        const key = e.keyCode || e.charCode
+        const isLeft = key == 37
+        const isRight = key == 39
+
+        if (isLeft) {
+            this.changeRound('prev')
+        } else if (isRight) {
+            this.changeRound('next')
         }
     }
   }
