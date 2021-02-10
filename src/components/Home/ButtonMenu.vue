@@ -1,8 +1,10 @@
 <template>
     <div class="menu-button">
-        <router-link :to="target" :style="color ? `color: ${color};` : 'color: default;'">
+        <button
+          @click.prevent="action ? action() : target ? $router.push(target) : null" 
+          :style="color ? `color: ${color};` : 'color: default;'">
             {{ text }}
-        </router-link>
+        </button>
     </div>
 </template>
 
@@ -11,7 +13,8 @@ export default {
   props: {
     text: String,
     target: String,
-    color: String
+    color: String,
+    action: Function
   }
 }
 </script>
@@ -21,17 +24,18 @@ export default {
     display: block;
     margin: 10px 15px;
 
-    > a {
-        width: 150px;
+    > button {
+        width: 170px;
         color: white;
-        padding: 5px 10px;
+        padding: 8px 10px;
         font-weight: bold;
         border-radius: 15px;
         display: inline-block;
         text-decoration: none;
         border: 1px solid $blue-color;
+        background-color: transparent;
     }
-    > a:hover {
+    > button:hover {
         border: 1px solid white;
         background-color: $blue-color;
     }

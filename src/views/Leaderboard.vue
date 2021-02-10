@@ -7,221 +7,21 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Country</th>
+                    <th title="Country">🌎</th>
                     <th>Pseudo</th>
                     <th>Score</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>FR</td>
-                    <td>kib</td>
-                    <td>50 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>FR</td>
-                    <td>kibwashere</td>
-                    <td>3 &#9834;</td>
-                </tr>
-                <tr>
-                    <td>199</td>
-                    <td>??</td>
-                    <td>azekaze zaejioazenazazneao ezoazeazoeza</td>
-                    <td>990 &#9834;</td>
+                <tr v-for="(userData, index) in usersData">
+                    <td>{{ index + 1 }}</td>
+                    <td
+                        :title="userData.countryCode || 'Another planet'"
+                    >
+                        {{ userData.flagEmoji || userData.countryCode || "🪐" }}
+                    </td>
+                    <td>{{ userData.pseudo }}</td>
+                    <td>{{ userData.score }} &#9834;</td>
                 </tr>
             </tbody>
         </table>
@@ -229,6 +29,42 @@
   </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+//   components: {
+//     ProgressBar,
+//     SmallLogoX30
+//   },
+  data () {
+    return {
+      info: null,
+      loading: true,
+      errored: false,
+      usersData: null
+    }
+  },
+  filters: {
+    currencydecimal (value) {
+      return value.toFixed(2)
+    }
+  },
+  mounted () {
+    axios
+      .get('/about')
+      .then(response => {
+        this.usersData = response.data.value
+      })
+      .catch(error => {
+        console.log(error)
+        // this.errored = true
+      })
+      // .finally(() => this.loading = false)
+  }
+}
+</script>
 
 <style lang="scss">
 .leaderboard-content {

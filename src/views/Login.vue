@@ -4,7 +4,7 @@
         <div>
             <ButtonMenu
                 text="GUEST MODE"
-                target="/play"
+                :action="hereWeGo"
             />
         </div>
         <div class="or-separator">
@@ -12,7 +12,7 @@
         </div>
         <div class="form-ranked">
             <input id="pseudo" type="pseudo" name="pseudo" placeholder="Your pseudo" class="subscribeInput"/>
-            <input d="email" type="email" name="email" placeholder="Your email" class="subscribeInput"/>
+            <input id="email" type="email" name="email" placeholder="Your email" class="subscribeInput"/>
             <ButtonMenu
                 text="RANKED MODE"
                 target="/play"
@@ -29,6 +29,23 @@ import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 export default {
   components: {
     ButtonMenu
+  },
+  methods: {
+    hereWeGo () {
+        console.log('-- aze')
+    },
+    doCommand(e) {
+        const currTarget = e.target
+        const key = e.keyCode || e.charCode
+        const isLeft = key == 37
+        const isRight = key == 39
+
+        if (isLeft) {
+            this.changeRound('prev')
+        } else if (isRight) {
+            this.changeRound('next')
+        }
+    }
   }
 }
 </script>
@@ -67,4 +84,3 @@ export default {
     }
 }
 </style>
-

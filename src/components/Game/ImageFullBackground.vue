@@ -19,6 +19,7 @@ export default {
   background-position: center center;
   background-attachment: fixed;
   background-image: url('~@/assets/bg.jpg');
+  background-size: cover;
   position: fixed;
   width: 100%;
   height: 100%;
