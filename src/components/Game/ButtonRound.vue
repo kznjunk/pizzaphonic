@@ -1,11 +1,14 @@
 <template>
     <div class="round-content">
         <button @click="changeRound('prev')"><</button>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 1 }" data-round="1">1. Best Soundtrack</span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 2 }" data-round="2">2. Best </span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 3 }" data-round="3">3. Best Soundtrack</span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 4 }" data-round="4">4. Best </span>
-        <span class="round-name" v-bind:class="{ 'active': currRound === 5 }" data-round="5">5. Best Soundtrack</span>
+        <span
+            v-for="(round, index) in rounds"
+            class="round-name"
+            v-bind:class="{ 'active': currRound === index + 1 }"
+            :data-round="index + 1"
+        >
+            {{ index + 1 }}. {{ round.name }}
+        </span>
         <button @click="changeRound('next')">></button>
     </div>
 </template>
@@ -15,24 +18,25 @@ import EventBus from "@/components/EventBus";
 
 export default {
   props: {
-    target: String
+    target: String,
+    rounds: Array
   },
   data() {
     return {
       currRound: 1
     }
   },
-    created() {
-        document.addEventListener('keyup', this.doCommand)
-    },
-    destroyed() {
-        document.removeEventListener('keyup', this.doCommand)
-    },
+  created() {
+    document.addEventListener('keyup', this.doCommand)
+  },
+  destroyed() {
+    document.removeEventListener('keyup', this.doCommand)
+  },
   methods: {
     changeRound (wayToGo) {
         const isPrev = wayToGo === 'prev'
         const isNext = wayToGo === 'next'
-        const isValidWay = (isPrev && this.currRound > 1) || (isNext && this.currRound < 5)
+        const isValidWay = (isPrev && this.currRound > 1) || (isNext && this.currRound < this.rounds.length)
 
         if (isValidWay) {
             isPrev ? this.currRound-- : this.currRound++
@@ -66,6 +70,7 @@ export default {
 .round-name {
     display: none;
     margin: 0px 30px;
+    // font-family:
 }
 .round-name.active {
     display: inline-block;

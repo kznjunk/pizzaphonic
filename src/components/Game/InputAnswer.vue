@@ -1,7 +1,16 @@
 <template>
     <div id="inputAnswer">
         <div>
-            <input ng-model='userAnswer' id="answer" type="" name="" placeholder="Type your answer"/>
+            <input
+              v-on:keyup.enter="submitUserAnswer"
+              v-model="userAnswer"
+              ng-model='userAnswer'
+              id="answer"
+              type=""
+              name=""
+              placeholder="Type your answer"
+              autocomplete="off"
+            />
         </div>
     </div>
 </template>
@@ -12,6 +21,33 @@ export default {
     text: String,
     target: String,
     color: String
+  },
+  data: function(){
+    return {
+        userAnswer: null
+    }
+  },
+  methods: {
+    submitUserAnswer () {
+      console.log(this.userAnswer)
+
+        // axios
+        //     .get('/what', { params })
+        //     .then(response => {
+        //         const data = response.data
+        //         const token = data && data.token
+        //         const gameData = data && data.game
+
+        //         if (token && gameData) {
+        //             this.$router.push({ name: 'Play', params: {token, gameData } })
+        //         } else {
+        //             console.log('hmm show err')
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+    }
   }
 }
 </script>

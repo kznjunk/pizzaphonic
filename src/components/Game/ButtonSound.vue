@@ -1,25 +1,19 @@
 <template>
-  <div class="visual">
-      <div data-round="1" v-bind:class="{ 'active': currRound === 1 }">
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div><br/>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
+  <div class="pizzas">
+    <div
+      v-for="(soundsRound, i) in sounds"
+      :data-round="i + 1"
+      v-bind:class="{ 'active': currRound === i + 1 }"
+    >
+      <div
+        v-for="(sound, j) in soundsRound"
+        :class="`pizza ${sound.level}`"
+        :data-id="sound.id"
+        :data-soundFileName="sound.soundFileName"
+      >
+        {{ sound.level}}
       </div>
-      <div data-round="2" v-bind:class="{ 'active': currRound === 2 }">
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div><br/>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-          <div class="aSound" style="height:50px"></div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -28,7 +22,7 @@ import EventBus from "@/components/EventBus";
 
 export default {
   props: {
-    target: String
+    sounds: Array
   },
   data() {
     return {
@@ -49,24 +43,74 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.visual > div {
+.pizzas > div {
   display: none;
-}.visual > div.active {
+}
+.pizzas > div.active {
   display: inline-block;
 }
-.aSound {
+
+.pizza {
   display: inline-block;
-  width: 50px;
-  height: 10px;
   border: 1px solid rgba(51, 153, 255, 0.4);
   background-color: rgba(51, 153, 255, 0.2);
-  margin: 5px;
+  margin: 15px;
   position: relative;
+  border-radius: 50px;
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+
+  cursor: pointer;
+  background-color: rgba(28, 28, 28, 0.9);
+  border: 2px solid rgba(43, 116, 199, 1);
+  -webkit-filter: blur(0.5px);
+  -moz-filter: blur(0.5px);
+  -o-filter: blur(0.5px);
+  -ms-filter: blur(0.5px);
+  filter: blur(1px);
+
+  img {
+    width: 100%;
+  }
 }
-.aSound:nth-child(odd) {
-  border-top-left-radius: 15px;
+.pizza.easy {
+  width: 90px;
+  height: 90px;
 }
-.aSound:nth-child(even) {
-  border-top-right-radius: 15px;
+.pizza.medium {
+  width: 70px;
+  height: 70px;
+}
+.pizza.hard {
+  width: 50px;
+  height: 50px;
+}
+.pizza:hover {
+  border: 2px solid rgb(30, 30, 30);
+  background-color: rgba(43, 116, 199, 0.6);
+  -webkit-filter: blur(0.2px);
+  -moz-filter: blur(0.2px);
+  -o-filter: blur(0.2px);
+  -ms-filter: blur(0.2px);
+  filter: blur(0.5px);
+}
+
+@media screen and (max-width: 1000px) {
+  .pizza {
+    margin: 10px;
+  }
+  .pizza.easy {
+    width: 70px;
+    height: 70px;
+  }
+  .pizza.medium {
+    width: 50px;
+    height: 50px;
+  }
+  .pizza.hard {
+    width: 30px;
+    height: 30px;
+  }
 }
 </style>

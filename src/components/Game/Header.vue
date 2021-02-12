@@ -4,17 +4,17 @@
             <IconExit target="/" />
         </div>
         <div class="play-header-center">
-            <ButtonRound />
+            <ButtonRound
+                :rounds="rounds"
+            />
         </div>
         <div class="play-header-right">
-            <IconLife />
-            <IconLife />
-            <IconLife />
-            <IconLife />
-            <IconLife />
+            <IconLife
+                :userLife="userLife"
+            />
         </div>
         <div class="play-header-right score">
-            100 / 100 ♪
+            {{ userScore }} / {{ sounds[0].length }} ♪
         </div>
     </div>
 </template>
@@ -29,6 +29,16 @@ export default {
     IconLife,
     IconExit,
     ButtonRound
+  },
+  props: {
+    rounds: Array,
+    sounds: Array,
+    userScore: Number,
+    userLife: Number
+  },
+  created () {
+      console.log('---wv')
+    console.log(this.sounds.length)
   }
 }
 </script>

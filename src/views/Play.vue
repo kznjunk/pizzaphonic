@@ -1,7 +1,12 @@
 <template>
   <div class="play">
         <ImageFullBackground />
-        <Header />
+        <Header
+          :rounds="rounds"
+          :sounds="sounds"
+          :userScore="userScore"
+          :userLife="userLife"
+        />
         <!-- OVERLAY
         <div class="pageOverlay">
             <div class="correctAnswer displayNone" ng-class="currentOverlay === 1 && lifes > 0 ? '' : 'displayNone'"></div>
@@ -22,7 +27,9 @@
         </div> -->
         <!-- END OF THE OVERLAY -->
         <!-- SUCH GREAT VISUAL -->
-        <ButtonSound />
+        <ButtonSound
+          :sounds="sounds"
+        />
         <!-- END OF THE SUCH GREAT VISUAL -->
         <!-- MAIN CONTENT
         <div class="page">
@@ -49,6 +56,26 @@ export default {
     Header,
     ButtonSound,
     InputAnswer
+  },
+  props: {
+    token: String,
+    gameData: Object
+  },
+  data: function(){
+    return {
+      rounds: null,
+      sounds: null,
+      userScore: 0,
+      userLife: 5
+    }
+  },
+  created () {
+    if (!this.token || !this.gameData) {
+      this.$router.push({ name: 'Login' })
+    } else {
+      this.rounds = [ this.gameData.round ]
+      this.sounds = [ this.gameData.sounds ]
+    }
   }
 }
 </script>

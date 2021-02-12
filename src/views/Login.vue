@@ -4,18 +4,34 @@
         <div>
             <ButtonMenu
                 text="GUEST MODE"
-                :action="hereWeGo"
+                :action="guestSubscribe"
             />
         </div>
         <div class="or-separator">
             <span>OR</span>
         </div>
         <div class="form-ranked">
-            <input id="pseudo" type="pseudo" name="pseudo" placeholder="Your pseudo" class="subscribeInput"/>
-            <input id="email" type="email" name="email" placeholder="Your email" class="subscribeInput"/>
+            <input
+                v-model="pseudo"
+                id="pseudo"
+                type="pseudo"
+                name="pseudo"
+                placeholder="Your pseudo"
+                class="subscribeInput"
+                v-bind:class="{ 'error': isErrorPseudo }"
+            />
+            <input
+                v-model="email"
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Your email"
+                class="subscribeInput"
+                v-bind:class="{ 'error': isErrorEmail }"
+            />
             <ButtonMenu
                 text="RANKED MODE"
-                target="/play"
+                :action="rankedSubscribe"
                 color="red"
             />
         </div>
@@ -24,27 +40,87 @@
 </template>
 
 <script>
+import axios from "axios"
 import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
 export default {
   components: {
     ButtonMenu
   },
+  data: function(){
+    return {
+        pseudo: null,
+        email: null,
+        isErrorPseudo: false,
+        isErrorEmail: false
+    }
+  },
   methods: {
-    hereWeGo () {
-        console.log('-- aze')
+    guestSubscribe () {
+        this.subscribe({
+            email: 'unknown@unknown.com',
+            pseudo: 'unknown',
+            source: document.referrer
+        })
     },
-    doCommand(e) {
-        const currTarget = e.target
-        const key = e.keyCode || e.charCode
-        const isLeft = key == 37
-        const isRight = key == 39
+    rankedSubscribe() {
+        const pseudo = this.pseudo
+        const email = this.email
 
-        if (isLeft) {
-            this.changeRound('prev')
-        } else if (isRight) {
-            this.changeRound('next')
+        this.isErrorPseudo = !this.isValidPseudo(pseudo)
+        this.isErrorEmail = !this.isValidEmail(email)
+
+        if (this.isErrorPseudo || this.isErrorEmail) {
+
+        } else {
+            this.subscribe({
+                email,
+                pseudo,
+                source: document.referrer
+            })
         }
+    },
+    subscribe (params) {
+        axios
+            .get('/what', { params })
+            .then(response => {
+                const data = response.data
+                const token = data && data.token
+                const gameData = data && data.game
+
+                if (token && gameData) {
+                    this.$router.push({ name: 'Play', params: {token, gameData } })
+                } else {
+                    console.log('hmm show err')
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },
+    isValidPseudo (pseudo) {
+        if (pseudo) {
+            const isGoodType = typeof pseudo === 'string'
+            const isLengthValid = pseudo.length >= 2 && pseudo.length <= 50
+            const isRegexValid = /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿1234567890]*$/.test(pseudo)
+            const isRegexInvalid = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/.test(pseudo)
+
+            return isGoodType && isLengthValid && isRegexValid && !isRegexInvalid
+        }
+
+        return false
+    },
+    isValidEmail (email) {
+        console.log(email)
+        if (email) {
+            const isGoodType = typeof email === 'string'
+            const isLengthValid = email.length >= 5 && email.length <= 150
+            const isRegexValid = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/.test(email)
+
+            return isGoodType && isLengthValid && isRegexValid
+        }
+
+        return false
     }
   }
 }
@@ -59,6 +135,10 @@ export default {
         padding: 10px;
         display: block;
         margin: 15px auto;
+        border: 2px solid transparent;
+    }
+    input.error {
+        border: 2px solid $red-color;
     }
     .or-separator {
         margin: 25px 0px;

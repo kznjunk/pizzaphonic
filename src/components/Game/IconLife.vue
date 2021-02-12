@@ -1,19 +1,33 @@
 <template>
-    <img src="@/assets/lifeY.png" alt="life" rel="preload"/>
-    <!--<div class="rightLife">
-            <img ng-repeat="i in getNumber(5) track by $index" ng-src="$index < lifes ? 'img/lifeY.png' : 'img/lifeN.png'" alt="life"/>
-    </div>-->
+    <div class="lifes">
+        <img
+            v-for="i in maxLife" :key="i"
+            :src="require(userLife >= i ? '@/assets/lifeY.png' : '@/assets/lifeN.png')"
+            alt="life"
+            rel="preload"
+        />
+    </div>
 </template>
 
 <script>
 export default {
   props: {
-    target: String
+    userLife: Number
+  },
+  data() {
+    return {
+      maxLife: 5
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+.lifes {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+}
 img {
     width: 30px;
     margin: 0px 3px;
