@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import EventBus from '@/components/EventBus'
 import ImageFullBackground from '@/components/Game/ImageFullBackground.vue'
 import Header from '@/components/Game/Header.vue'
 import ButtonSound from '@/components/Game/ButtonSound.vue'
@@ -65,16 +67,81 @@ export default {
     return {
       rounds: null,
       sounds: null,
+      currentRound: 1,
       userScore: 0,
       userLife: 5
     }
   },
   created () {
-    if (!this.token || !this.gameData) {
-      this.$router.push({ name: 'Login' })
-    } else {
-      this.rounds = [ this.gameData.round ]
-      this.sounds = [ this.gameData.sounds ]
+    this.isUserLogged()
+    this.listenCurrentRound()
+    this.listenUserAnswer()
+  },
+  methods: {
+    isUserLogged () {
+      if (!this.token || !this.gameData) {
+        this.$router.push({ name: 'Login' })
+      } else {
+        this.rounds = [ this.gameData.round ]
+        this.sounds = [ this.gameData.sounds ]
+      }
+    },
+    listenCurrentRound () {
+      EventBus.$on('roundChanged', ({ currentRound }) => {
+        this.currentRound = currentRound
+      })
+    },
+    listenUserAnswer () {
+      EventBus.$on('userAnswer', userAnswer => {
+        if (userAnswer && userAnswer.length > 2 && this.userLife) {
+          const params = {
+            userAnswer,
+            userScore: this.userScore,
+            currentRound: this.currentRound,
+            userToken: this.token
+          }
+
+          axios
+            .get('/no', { params })
+            .then(response => {
+              const data = response.data
+              const answerData = data && data.answerData
+              const gameData = data && data.gameData
+
+              if (answerData && gameData) {
+                this.handleGoodAnswer(answerData, gameData)
+              } else {
+                this.handleWrongAnswer()
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
+    },
+    handleGoodAnswer (answerData, gameData) {
+      console.log('--- good')
+      const { id, name, imgUrl } = answerData
+      const { round, sounds } = gameData
+      this.userScore++
+      const isNewRound = this.userScore % 3 === 0 && this.rounds.some(item => item.name !== round.name)
+      console.log(isNewRound)
+
+      if (isNewRound) {
+        console.log('new round gogo')
+
+        this.rounds.push(round)
+        this.sounds.push(sounds)
+        console.log(this.sounds)
+      } else {
+        console.log('-not yet new round')
+      }
+
+    },
+    handleWrongAnswer () {
+      console.log('--- bad')
+      
     }
   }
 }

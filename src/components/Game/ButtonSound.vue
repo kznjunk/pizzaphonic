@@ -3,7 +3,7 @@
     <div
       v-for="(soundsRound, i) in sounds"
       :data-round="i + 1"
-      v-bind:class="{ 'active': currRound === i + 1 }"
+      v-bind:class="{ 'active': currentRound === i + 1 }"
     >
       <div
         v-for="(sound, j) in soundsRound"
@@ -11,6 +11,7 @@
         :data-id="sound.id"
         :data-soundFileName="sound.soundFileName"
       >
+        <img v-if="sound.imgUrl" :src="sound.imgUrl" alt=""/>
         {{ sound.level}}
       </div>
     </div>
@@ -26,19 +27,14 @@ export default {
   },
   data() {
     return {
-      currRound: 1
+      currentRound: 1
     }
   },
   created () {
-    EventBus.$on('roundChanged', ({ wayToGo, currRound }) => {
-      this.currRound = currRound
+    EventBus.$on('roundChanged', ({ wayToGo, currentRound }) => {
+      this.currentRound = currentRound
     })
-  } 
-  // methods: {
-  //   myMethod () {
-  //     EventBus.$emit("my-event")
-  //   }
-  // }
+  }
 }
 </script>
 

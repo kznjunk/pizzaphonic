@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import EventBus from "@/components/EventBus"
+
 export default {
   props: {
     text: String,
@@ -29,24 +31,11 @@ export default {
   },
   methods: {
     submitUserAnswer () {
-      console.log(this.userAnswer)
+      const userAnswer = this.userAnswer
 
-        // axios
-        //     .get('/what', { params })
-        //     .then(response => {
-        //         const data = response.data
-        //         const token = data && data.token
-        //         const gameData = data && data.game
-
-        //         if (token && gameData) {
-        //             this.$router.push({ name: 'Play', params: {token, gameData } })
-        //         } else {
-        //             console.log('hmm show err')
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
+      if (userAnswer && userAnswer.length > 2) {
+        EventBus.$emit('userAnswer', this.userAnswer)
+      }
     }
   }
 }

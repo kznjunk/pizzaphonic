@@ -1,10 +1,10 @@
 <template>
-    <div class="round-content">
+    <div class="round-content" :data-current-round="currentRound">
         <button @click="changeRound('prev')"><</button>
         <span
             v-for="(round, index) in rounds"
             class="round-name"
-            v-bind:class="{ 'active': currRound === index + 1 }"
+            v-bind:class="{ 'active': currentRound === index + 1 }"
             :data-round="index + 1"
         >
             {{ index + 1 }}. {{ round.name }}
@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      currRound: 1
+      currentRound: 1
     }
   },
   created() {
@@ -36,11 +36,11 @@ export default {
     changeRound (wayToGo) {
         const isPrev = wayToGo === 'prev'
         const isNext = wayToGo === 'next'
-        const isValidWay = (isPrev && this.currRound > 1) || (isNext && this.currRound < this.rounds.length)
+        const isValidWay = (isPrev && this.currentRound > 1) || (isNext && this.currentRound < this.rounds.length)
 
         if (isValidWay) {
-            isPrev ? this.currRound-- : this.currRound++
-            EventBus.$emit('roundChanged', { wayToGo, currRound: this.currRound })
+            isPrev ? this.currentRound-- : this.currentRound++
+            EventBus.$emit('roundChanged', { wayToGo, currentRound: this.currentRound })
         }
     },
     doCommand(e) {
