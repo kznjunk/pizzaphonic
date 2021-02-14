@@ -14,7 +14,7 @@
             />
         </div>
         <div class="play-header-right score">
-            {{ userScore }} / {{ sounds[0].length }} ♪
+            {{ userScore }} / {{ sounds.reduce((a, b) => a + b.length, 0) }} ♪
         </div>
     </div>
 </template>

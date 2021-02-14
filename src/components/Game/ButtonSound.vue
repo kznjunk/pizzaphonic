@@ -9,31 +9,54 @@
         v-for="(sound, j) in soundsRound"
         :class="`pizza ${sound.level}`"
         :data-id="sound.id"
-        :data-soundFileName="sound.soundFileName"
+        @click="playSound(i + 1, sound.soundFileName)"
       >
         <img v-if="sound.imgUrl" :src="sound.imgUrl" alt=""/>
-        {{ sound.level}}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Howl, Howler } from 'howler';
 import EventBus from "@/components/EventBus";
 
 export default {
   props: {
-    sounds: Array
+    sounds: Array,
+    rounds: Array
   },
   data() {
     return {
-      currentRound: 1
+      currentRound: 1,
+      currentPlayableSound: null
     }
   },
   created () {
     EventBus.$on('roundChanged', ({ wayToGo, currentRound }) => {
       this.currentRound = currentRound
     })
+  },
+  mounted: function() {
+    // for (let i = 0; i < this.sounds[0].length; i++) {
+    //   const host = 'https://pizzaphonic.s3.eu-west-2.amazonaws.com/sounds'
+    //   const soundUrl = `${host}/1-popular/${this.sounds[0][i]['soundFileName']}.wav`
+
+    //   new Howl({
+    //     src: soundUrl,
+    //     preload: true
+    //   })
+    // }
+  },
+  methods: {
+    playSound (roundId, soundFileName) {
+      const host = 'https://pizzaphonic.s3.eu-west-2.amazonaws.com/sounds'
+      const soundUrl = `${host}/${roundId}-${this.rounds[roundId - 1]['folderName']}/${soundFileName}.wav`
+
+      if (this.currentPlayableSound) this.currentPlayableSound.pause()
+      this.currentPlayableSound = new Audio(soundUrl)
+      this.currentPlayableSound.play()
+    }
   }
 }
 </script>
@@ -60,15 +83,18 @@ export default {
   cursor: pointer;
   background-color: rgba(28, 28, 28, 0.9);
   border: 2px solid rgba(43, 116, 199, 1);
-  -webkit-filter: blur(0.5px);
-  -moz-filter: blur(0.5px);
-  -o-filter: blur(0.5px);
-  -ms-filter: blur(0.5px);
-  filter: blur(1px);
+  filter: blur(0px);
 
   img {
     width: 100%;
+    height: 100%;
+    position: fixed;
+    border-radius: 50px;
   }
+}
+.pizza:hover {
+  border: 2px solid rgb(30, 30, 30);
+  background-color: rgba(43, 116, 199, 0.6);
 }
 .pizza.easy {
   width: 90px;
@@ -81,15 +107,6 @@ export default {
 .pizza.hard {
   width: 50px;
   height: 50px;
-}
-.pizza:hover {
-  border: 2px solid rgb(30, 30, 30);
-  background-color: rgba(43, 116, 199, 0.6);
-  -webkit-filter: blur(0.2px);
-  -moz-filter: blur(0.2px);
-  -o-filter: blur(0.2px);
-  -ms-filter: blur(0.2px);
-  filter: blur(0.5px);
 }
 
 @media screen and (max-width: 1000px) {

@@ -28,6 +28,7 @@
         <!-- END OF THE OVERLAY -->
         <!-- SUCH GREAT VISUAL -->
         <ButtonSound
+          :rounds="rounds"
           :sounds="sounds"
         />
         <!-- END OF THE SUCH GREAT VISUAL -->
@@ -126,22 +127,27 @@ export default {
       const { round, sounds } = gameData
       this.userScore++
       const isNewRound = this.userScore % 3 === 0 && this.rounds.some(item => item.name !== round.name)
-      console.log(isNewRound)
+
+      this.$set(this.sounds[this.currentRound - 1][id], 'imgUrl', 'https://i.stack.imgur.com/1HUb8.png')
 
       if (isNewRound) {
         console.log('new round gogo')
 
         this.rounds.push(round)
         this.sounds.push(sounds)
-        console.log(this.sounds)
       } else {
         console.log('-not yet new round')
       }
 
     },
     handleWrongAnswer () {
-      console.log('--- bad')
-      
+      this.userLife--
+      var audio = new Audio(require('@/assets/wrongAnswer.wav'))
+      audio.play()
+
+      if (this.userLife < 1) {
+        console.log('--lost')
+      }
     }
   }
 }

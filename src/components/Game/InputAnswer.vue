@@ -35,6 +35,7 @@ export default {
 
       if (userAnswer && userAnswer.length > 2) {
         EventBus.$emit('userAnswer', this.userAnswer)
+        this.userAnswer = ''
       }
     }
   }

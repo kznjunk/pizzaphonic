@@ -1,5 +1,5 @@
 <template>
-    <div class="lifes">
+    <div class="lifes" v-bind:class="{ 'shake-shake': shouldShake }">
         <img
             v-for="i in maxLife" :key="i"
             :src="require(userLife >= i ? '@/assets/lifeY.png' : '@/assets/lifeN.png')"
@@ -16,7 +16,17 @@ export default {
   },
   data() {
     return {
-      maxLife: 5
+      maxLife: 5,
+      shouldShake: false
+    }
+  },
+  watch: {
+    'userLife': function(val, oldVal) {
+        this.shouldShake = true
+
+        window.setTimeout(() => {
+            this.shouldShake = false
+        }, 1000)
     }
   }
 }
@@ -75,5 +85,25 @@ img:nth-child(5) {
     }
     img:nth-child(5) {
     }
+}
+
+.lifes.shake-shake {
+  animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, -1px, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 2px, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, -2px, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 2px, 0);
+  }
 }
 </style>
