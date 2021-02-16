@@ -50,8 +50,11 @@ export default {
   },
   methods: {
     playSound (roundId, soundFileName) {
-      const host = 'https://pizzaphonic.s3.eu-west-2.amazonaws.com/sounds'
-      const soundUrl = `${host}/${roundId}-${this.rounds[roundId - 1]['folderName']}/${soundFileName}.wav`
+      const host = 'https://di3xllda87oyr.cloudfront.net'
+      const type = 'sounds'
+      const folderName = `${roundId}-${this.rounds[roundId - 1]['folderName']}`
+      const extension = '.wav'
+      const soundUrl = `${host}/${type}/${folderName}/${soundFileName}${extension}`
 
       if (this.currentPlayableSound) this.currentPlayableSound.pause()
       this.currentPlayableSound = new Audio(soundUrl)

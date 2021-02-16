@@ -122,23 +122,25 @@ export default {
       })
     },
     handleGoodAnswer (answerData, gameData) {
-      console.log('--- good')
       const { id, name, imgUrl } = answerData
       const { round, sounds } = gameData
       this.userScore++
       const isNewRound = this.userScore % 3 === 0 && this.rounds.some(item => item.name !== round.name)
 
-      this.$set(this.sounds[this.currentRound - 1][id], 'imgUrl', 'https://i.stack.imgur.com/1HUb8.png')
+      const host = 'https://di3xllda87oyr.cloudfront.net'
+      const type = 'images'
+      const folderName = `${this.currentRound}-${this.rounds[this.currentRound - 1]['folderName']}`
+      const extension = '.png'
+      const imageUrl = `${host}/${type}/${folderName}/${imgUrl}${extension}`
+
+      this.$set(this.sounds[this.currentRound - 1][id - 1], 'imgUrl', imageUrl)
 
       if (isNewRound) {
         console.log('new round gogo')
 
         this.rounds.push(round)
         this.sounds.push(sounds)
-      } else {
-        console.log('-not yet new round')
       }
-
     },
     handleWrongAnswer () {
       this.userLife--
