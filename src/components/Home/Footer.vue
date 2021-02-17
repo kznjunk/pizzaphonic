@@ -1,10 +1,26 @@
 <template>
   <footer>
-    <div>
-      © 2021 - <a href="https://twitter.com/kibwashere" target="_blank">@kibwashere</a>
+    <div v-html="footer.meh">
+      {{ footer.meh }}
     </div>
   </footer>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+import ButtonMenu from "@/components/Home/ButtonMenu.vue"
+
+export default {
+  components: {
+    ButtonMenu
+  },
+  computed: {
+    ...mapState({
+      footer: state => state.footer
+    })
+  }
+}
+</script>
 
 <style scoped lang="scss">
 footer {
@@ -18,3 +34,4 @@ footer {
   background-color: black;
 }
 </style>
+

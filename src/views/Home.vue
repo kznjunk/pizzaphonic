@@ -1,19 +1,20 @@
 <template>
   <div class="home">
     <img alt="Pizzaphonic" src="../assets/pp.png" />
-    <h2>Are you gamer enough..?</h2>
+    <h2>{{ home.slogan }}</h2>
     <div class="home-menus">
       <ButtonMenu
-        text="RULES"
+        :text="home.rules"
         target="/rules"
       />
       <ButtonMenu
-        text="LEADERBOARD"
+        :text="home.leaderboard"
         target="/leaderboard"
       />
       <br/>
+      {{ home.blaaaa }}
       <ButtonMenu
-        text="PLAY"
+        :text="home.play"
         target="/login"
         color="red"
       />
@@ -22,11 +23,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
 export default {
   components: {
     ButtonMenu
+  },
+  computed: {
+    ...mapState({
+      home: state => state.home
+    })
   }
 }
 </script>

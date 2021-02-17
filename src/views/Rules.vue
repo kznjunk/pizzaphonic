@@ -1,25 +1,35 @@
 <template>
   <div class="about">
-    <h2 class="menu-title">How to play:</h2>
+    <h2 class="menu-title">{{ rules.title }}</h2>
     <p>
         <ol>
-            <li>Click on the circles</li>
-            <li>Listen to the sounds</li>
-            <li>Guess and type the game's name..</li>
-            <li>.. and find them all!</li>
+            <li>{{ rules.r1 }}</li>
+            <li>{{ rules.r2 }}</li>
+            <li>{{ rules.r3 }}</li>
+            <li>{{ rules.r4 }}</li>
         </ol>
     </p>
-
-    <h2 class="menu-title">Tips:</h2>
+    <h2 class="menu-title">{{ rules.tips }}</h2>
     <ul>
-        <li>You have 5 lifes</li>
-        <li>Unlock a new round every 3 (good) answers</li>
-        <li>Smaller is a circle, harder is the sound to guess</li>
-        <li>There is no memory card. If you leave, your progress is lost</li>
+        <li>{{ rules.t1 }}</li>
+        <li>{{ rules.t2 }}</li>
+        <li>{{ rules.t3 }}</li>
+        <li>{{ rules.t4 }}</li>
     </ul>
-
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState({
+      rules: state => state.rules
+    })
+  }
+}
+</script>
 
 <style lang="scss">
 .about {

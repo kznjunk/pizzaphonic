@@ -1,11 +1,19 @@
 <template>
   <div class="play">
+        <Lightbox
+          v-if="isLightboxActive || userLife < 1"
+          v-on:click.native="isLightboxActive = false"
+          :title="lightboxTitle"
+          :image="lightboxImage"
+          :content="lightboxContent"
+        />
         <ImageFullBackground />
         <Header
           :rounds="rounds"
           :sounds="sounds"
           :userScore="userScore"
           :userLife="userLife"
+          :highlightNewRound="highlightNewRound"
         />
         <!-- OVERLAY
         <div class="pageOverlay">
@@ -48,6 +56,7 @@
 <script>
 import axios from 'axios'
 import EventBus from '@/components/EventBus'
+import Lightbox from '@/components/Game/Lightbox.vue'
 import ImageFullBackground from '@/components/Game/ImageFullBackground.vue'
 import Header from '@/components/Game/Header.vue'
 import ButtonSound from '@/components/Game/ButtonSound.vue'
@@ -55,6 +64,7 @@ import InputAnswer from '@/components/Game/InputAnswer.vue'
 
 export default {
   components: {
+    Lightbox,
     ImageFullBackground,
     Header,
     ButtonSound,
@@ -69,27 +79,26 @@ export default {
       rounds: null,
       sounds: null,
       currentRound: 1,
+      highlightNewRound: false,
       userScore: 0,
-      userLife: 5
+      userLife: 5,
+      isLightboxActive: false,
+      lightboxTitle: null,
+      lightboxImage: null,
+      lightboxContent: null
     }
   },
   created () {
-    this.isUserLogged()
+    this.rounds = [ this.gameData.round ]
+    this.sounds = [ this.gameData.sounds ]
     this.listenCurrentRound()
     this.listenUserAnswer()
   },
   methods: {
-    isUserLogged () {
-      if (!this.token || !this.gameData) {
-        this.$router.push({ name: 'Login' })
-      } else {
-        this.rounds = [ this.gameData.round ]
-        this.sounds = [ this.gameData.sounds ]
-      }
-    },
     listenCurrentRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
         this.currentRound = currentRound
+        this.highlightNewRound = false
       })
     },
     listenUserAnswer () {
@@ -124,23 +133,43 @@ export default {
     handleGoodAnswer (answerData, gameData) {
       const { id, name, imgUrl } = answerData
       const { round, sounds } = gameData
+      const imageUrl = this.getImageUrl(imgUrl)
       this.userScore++
       const isNewRound = this.userScore % 3 === 0 && this.rounds.some(item => item.name !== round.name)
 
+      this.addImageInBubble(id, imageUrl)
+      this.showGoodAnswerLightbox(imageUrl)
+      if (isNewRound) this.unlockNextRound(round, sounds)
+    },
+    getImageUrl(imgUrl) {
       const host = 'https://di3xllda87oyr.cloudfront.net'
       const type = 'images'
       const folderName = `${this.currentRound}-${this.rounds[this.currentRound - 1]['folderName']}`
       const extension = '.png'
-      const imageUrl = `${host}/${type}/${folderName}/${imgUrl}${extension}`
 
-      this.$set(this.sounds[this.currentRound - 1][id - 1], 'imgUrl', imageUrl)
+      return `${host}/${type}/${folderName}/${imgUrl}${extension}`
+    },
+    addImageInBubble (id, imageUrl) {
+      const soundIndex = this.sounds[this.currentRound - 1].findIndex(sound => sound.id === id)
+      const soundsPath = this.sounds[this.currentRound - 1][soundIndex]
 
-      if (isNewRound) {
-        console.log('new round gogo')
+      this.$set(soundsPath, 'imgUrl', imageUrl)
+    },
+    showGoodAnswerLightbox (imageUrl) {
+      this.lightboxTitle = 'You unlocked a new round!'
+      // this.lightboxTitle = 'Nice one'
+      this.lightboxImage = imageUrl
+      this.lightboxContent = 'Such wow'
+      this.isLightboxActive = true
 
-        this.rounds.push(round)
-        this.sounds.push(sounds)
-      }
+      window.setTimeout(() => {
+        this.isLightboxActive = false
+      }, 3000)
+    },
+    unlockNextRound(round, sounds) {
+      this.rounds.push(round)
+      this.sounds.push(sounds)
+      this.highlightNewRound = true
     },
     handleWrongAnswer () {
       this.userLife--
@@ -148,7 +177,10 @@ export default {
       audio.play()
 
       if (this.userLife < 1) {
-        console.log('--lost')
+        this.lightboxTitle = 'You died.'
+        this.lightboxImage = null
+        this.lightboxContent = `Not very impressive score: ${this.userScore}, have another try?`
+        this.isLightboxActive = true
       }
     }
   }

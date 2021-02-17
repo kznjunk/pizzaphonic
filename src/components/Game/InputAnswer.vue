@@ -11,14 +11,24 @@
               placeholder="Type your answer"
               autocomplete="off"
             />
+            <button
+              class="send-answer-button"
+              @click="submitUserAnswer"
+            >
+              <IconSend />
+          </button>
         </div>
     </div>
 </template>
 
 <script>
 import EventBus from "@/components/EventBus"
+import IconSend from "@/components/Game/IconSend.vue"
 
 export default {
+  components: {
+    IconSend
+  },
   props: {
     text: String,
     target: String,
@@ -65,6 +75,16 @@ export default {
   text-align: center;
   font-size: 22px;
 }
-#inputAnswer > div input:focus {
+.send-answer-button {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  color: white;
+  padding: 10px;
+  border: 1px solid $blue-color;
+  background-color: transparent;
 }
+
 </style>

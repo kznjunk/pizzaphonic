@@ -43,7 +43,18 @@ const routes = [
     path: "/play",
     name: "Play",
     component: Play,
-    props: true
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (to.params.token && to.params.gameData) {
+        next()
+      } else {
+        next({ name: 'Login' })
+      }
+    }
+  },
+  {
+    path: '*',
+    component: Home
   }
 ];
 
@@ -53,15 +64,15 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   const wasPlayPage = from.name === 'Play'
+router.beforeEach((to, from, next) => {
+  const wasPlayPage = from.name === 'Play'
 
-//   if (wasPlayPage) {
-//     const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
-//     if (answer) next()
-//   } else {
-//     next()
-//   }
-// })
+  if (wasPlayPage) {
+    const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+    if (answer) next()
+  } else {
+    next()
+  }
+})
 
 export default router;

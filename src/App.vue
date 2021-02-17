@@ -3,7 +3,6 @@
     <div id="app-content">
       <router-view />
     </div>
-
     <Footer />
   </div>
 </template>
@@ -23,7 +22,6 @@ export default {
 #app-content {
   height: 100%;
 }
-
 #app {
   text-align: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;

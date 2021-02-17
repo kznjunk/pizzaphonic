@@ -41,6 +41,7 @@
 
 <script>
 import axios from "axios"
+import { mapState } from 'vuex'
 import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
 export default {
@@ -102,7 +103,7 @@ export default {
         if (pseudo) {
             const isGoodType = typeof pseudo === 'string'
             const isLengthValid = pseudo.length >= 2 && pseudo.length <= 50
-            const isRegexValid = /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿1234567890]*$/.test(pseudo)
+            const isRegexValid = /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/.test(pseudo)
             const isRegexInvalid = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/.test(pseudo)
 
             return isGoodType && isLengthValid && isRegexValid && !isRegexInvalid
@@ -122,6 +123,11 @@ export default {
 
         return false
     }
+  },
+  computed: {
+    ...mapState({
+      login: state => state.login
+    })
   }
 }
 </script>

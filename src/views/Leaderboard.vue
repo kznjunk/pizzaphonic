@@ -1,43 +1,40 @@
 <template>
   <div class="leaderboard-content">
-    <h2 class="menu-title">Give these guys a cookie:</h2>
-  <div>
+    <h2 class="menu-title">{{ leaderboard.title }}</h2>
     <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th title="Country">🌎</th>
-                    <th>Pseudo</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(userData, index) in usersData">
-                    <td>{{ index + 1 }}</td>
-                    <td
-                        :title="userData.countryCode || 'Another planet'"
-                    >
-                        {{ userData.flagEmoji || userData.countryCode || "🪐" }}
-                    </td>
-                    <td>{{ userData.pseudo }}</td>
-                    <td>{{ userData.score }} &#9834;</td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th title="Country">{{ leaderboard.country }}</th>
+                        <th>{{ leaderboard.pseudo }}</th>
+                        <th>{{ leaderboard.score }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(userData, index) in usersData">
+                        <td>{{ index + 1 }}</td>
+                        <td
+                            :title="userData.countryCode || leaderboard.farFarAwayTitle"
+                        >
+                            {{ userData.flagEmoji || userData.countryCode || leaderboard.farFarAway }}
+                        </td>
+                        <td>{{ userData.pseudo }}</td>
+                        <td>{{ userData.score }} &#9834;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 
 export default {
-//   components: {
-//     ProgressBar,
-//     SmallLogoX30
-//   },
   data () {
     return {
       info: null,
@@ -62,6 +59,11 @@ export default {
         // this.errored = true
       })
       // .finally(() => this.loading = false)
+  },
+  computed: {
+    ...mapState({
+      leaderboard: state => state.leaderboard
+    })
   }
 }
 </script>

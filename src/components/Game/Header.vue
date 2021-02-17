@@ -6,6 +6,7 @@
         <div class="play-header-center">
             <ButtonRound
                 :rounds="rounds"
+                :highlightNewRound="highlightNewRound"
             />
         </div>
         <div class="play-header-right">
@@ -34,7 +35,8 @@ export default {
     rounds: Array,
     sounds: Array,
     userScore: Number,
-    userLife: Number
+    userLife: Number,
+    highlightNewRound: Boolean
   },
   created () {
       console.log('---wv')

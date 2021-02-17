@@ -85,7 +85,6 @@ export default {
 
   cursor: pointer;
   background-color: rgba(28, 28, 28, 0.9);
-  border: 2px solid rgba(43, 116, 199, 1);
   filter: blur(0px);
 
   img {
@@ -102,14 +101,17 @@ export default {
 .pizza.easy {
   width: 90px;
   height: 90px;
+  border: 2px solid green;
 }
 .pizza.medium {
   width: 70px;
   height: 70px;
+  border: 2px solid rgba(43, 116, 199, 1);
 }
 .pizza.hard {
   width: 50px;
   height: 50px;
+  border: 2px solid red;
 }
 
 @media screen and (max-width: 1000px) {

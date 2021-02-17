@@ -1,8 +1,14 @@
 $main-text-color: white;
 $main-background-color: black;
 
+$red-color: rgb(170, 29, 38);
+$green-color: rgb(5, 163, 111);
 $blue-color: rgb(48, 118, 197);
-$red-color: red;
+
+@font-face {
+    font-family: 'Game';
+    src: url('~@/assets/game.ttf');
+}
 
 html,
 body {
@@ -24,4 +30,8 @@ a {
 .menu-title {
     color: $blue-color;
     text-decoration: underline;
+}
+
+.casper {
+    visibility: hidden;
 }
