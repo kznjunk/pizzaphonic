@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { Howl, Howler } from 'howler';
 import EventBus from "@/components/EventBus";
 
 export default {
@@ -36,17 +35,6 @@ export default {
     EventBus.$on('roundChanged', ({ wayToGo, currentRound }) => {
       this.currentRound = currentRound
     })
-  },
-  mounted: function() {
-    // for (let i = 0; i < this.sounds[0].length; i++) {
-    //   const host = 'https://pizzaphonic.s3.eu-west-2.amazonaws.com/sounds'
-    //   const soundUrl = `${host}/1-popular/${this.sounds[0][i]['soundFileName']}.wav`
-
-    //   new Howl({
-    //     src: soundUrl,
-    //     preload: true
-    //   })
-    // }
   },
   methods: {
     playSound (roundId, soundFileName) {
@@ -101,17 +89,17 @@ export default {
 .pizza.easy {
   width: 90px;
   height: 90px;
-  border: 2px solid green;
+  border: 2px solid $green-color;
 }
 .pizza.medium {
   width: 70px;
   height: 70px;
-  border: 2px solid rgba(43, 116, 199, 1);
+  border: 2px solid $blue-color;
 }
 .pizza.hard {
   width: 50px;
   height: 50px;
-  border: 2px solid red;
+  border: 2px solid $red-color;
 }
 
 @media screen and (max-width: 1000px) {

@@ -1,14 +1,14 @@
 <template>
-  <div class="login">
+    <div class="login">
     <div>
         <div>
             <ButtonMenu
-                text="GUEST MODE"
+                :text="login.guest"
                 :action="guestSubscribe"
             />
         </div>
         <div class="or-separator">
-            <span>OR</span>
+            <span>{{ login.or }}</span>
         </div>
         <div class="form-ranked">
             <input
@@ -16,7 +16,7 @@
                 id="pseudo"
                 type="pseudo"
                 name="pseudo"
-                placeholder="Your pseudo"
+                :placeholder="login.pseudoPlaceholder"
                 class="subscribeInput"
                 v-bind:class="{ 'error': isErrorPseudo }"
             />
@@ -25,12 +25,12 @@
                 id="email"
                 type="email"
                 name="email"
-                placeholder="Your email"
+                :placeholder="login.emailPlaceholder"
                 class="subscribeInput"
                 v-bind:class="{ 'error': isErrorEmail }"
             />
             <ButtonMenu
-                text="RANKED MODE"
+                :text="login.rank"
                 :action="rankedSubscribe"
                 color="red"
             />

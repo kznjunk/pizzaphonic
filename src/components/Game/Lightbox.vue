@@ -6,7 +6,7 @@
         <img v-if="image" :src="image" alt="" />
         <p v-if="content">{{ content }}</p>
         <button v-if="true">Go back</button>
-    </div>
+      </div>
     </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 
 <style scoped lang="scss">
 .lightbox {
-    z-index: 1;
+    z-index: 3;
     top: 0;
     left: 0;
     width: 100%;
@@ -42,7 +42,7 @@ export default {
         background-color: rgba(0, 0, 0, 0.8);
     }
     .lightbox-content {
-        z-index: 2;
+        z-index: 4;
     }
 }
 </style>

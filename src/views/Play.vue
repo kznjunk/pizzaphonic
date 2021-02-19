@@ -1,5 +1,9 @@
 <template>
   <div class="play">
+        <LoadingScreen
+          :showLoadingScreen="showLoadingScreen"
+          :title="loadingScreenTitle"
+        />
         <Lightbox
           v-if="isLightboxActive || userLife < 1"
           v-on:click.native="isLightboxActive = false"
@@ -56,6 +60,8 @@
 <script>
 import axios from 'axios'
 import EventBus from '@/components/EventBus'
+
+import LoadingScreen from '@/components/Game/LoadingScreen.vue'
 import Lightbox from '@/components/Game/Lightbox.vue'
 import ImageFullBackground from '@/components/Game/ImageFullBackground.vue'
 import Header from '@/components/Game/Header.vue'
@@ -64,6 +70,7 @@ import InputAnswer from '@/components/Game/InputAnswer.vue'
 
 export default {
   components: {
+    LoadingScreen,
     Lightbox,
     ImageFullBackground,
     Header,
@@ -76,6 +83,8 @@ export default {
   },
   data: function(){
     return {
+      showLoadingScreen: true,
+      loadingScreenTitle: 'Round 1: Popular Games',
       rounds: null,
       sounds: null,
       currentRound: 1,
@@ -85,16 +94,94 @@ export default {
       isLightboxActive: false,
       lightboxTitle: null,
       lightboxImage: null,
-      lightboxContent: null
+      lightboxContent: null,
+      imgsToPreload: [
+        require('@/assets/lifeY.png'),
+        require('@/assets/lifeN.png'),
+        require('@/assets/bg.jpg'),
+        'https://images.unsplash.com/photo-1556040142-f86cda4b2819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=100'
+      ]
     }
   },
-  created () {
+  async created () {
+    console.log('-- in created')
     this.rounds = [ this.gameData.round ]
     this.sounds = [ this.gameData.sounds ]
     this.listenCurrentRound()
     this.listenUserAnswer()
+
+    console.log('pre loaded')
+
+    const host = 'https://di3xllda87oyr.cloudfront.net'
+    const type = 'sounds'
+    const folderName = `1-popular`
+    const extension = '.wav'
+    const sndsToPreload = this.gameData.sounds.map(snd => `${host}/${type}/${folderName}/${snd.soundFileName}${extension}`)
+
+    await Promise.all([
+      this.preLoadImages(this.imgsToPreload),
+      this.preLoadSounds(sndsToPreload)
+    ])
+
+    console.log('all loaded')
+  },
+  mounted () {
+    console.log('-- in mounted')
+
+    window.setTimeout(() => {
+      this.showLoadingScreen = false
+    }, 1000)
   },
   methods: {
+    async preLoadImages (imgs) {
+      return new Promise(resolve => {
+        const imgsToPreloadPromises = [ ]
+
+        for (let i = 0; i < imgs.length; i++) {
+          const imgToPreload = imgs[i]
+          imgsToPreloadPromises.push(this.preLoadImage(imgToPreload))
+        }
+
+        Promise.all(imgsToPreloadPromises)
+          .then(values => {
+            resolve()
+          })
+      })
+    },
+    async preLoadImage (imgToPreload) {
+      return new Promise(resolve => {
+        const img = new Image()
+        img.onload = () => {
+          console.log('img loaded')
+          // this.imgUrl = img.src;
+          // this.showImg = true;
+          resolve()
+        }
+        img.src = imgToPreload
+      })
+    },
+    async preLoadSounds (snds) {
+      return new Promise(resolve => {
+        const sndsToPreloadPromises = [ ]
+
+        for (let i = 0; i < snds.length; i++) {
+          const sndToPreload = snds[i]
+          sndsToPreloadPromises.push(this.preLoadSound(sndToPreload))
+        }
+
+        Promise.all(sndsToPreloadPromises)
+          .then(values => {
+            resolve()
+          })
+      })
+    },
+    async preLoadSound (sndToPreload) {
+      return new Promise(resolve => {
+        const audio = new Audio()
+        audio.addEventListener('canplaythrough', resolve, false)
+        audio.src = sndToPreload
+      })
+    },
     listenCurrentRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
         this.currentRound = currentRound

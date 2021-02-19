@@ -27,17 +27,12 @@ export default {
         score: 'Score',
     },
     login: {
-
+        guest: 'GUEST MODE',
+        or: 'OR',
+        pseudoPlaceholder: 'Your pseudo',
+        emailPlaceholder: 'Your email',
+        rank: 'RANKED MODE'
     },
-
-
-
-
-
-
-
-
-
     play: {
 
     },
