@@ -1,65 +1,49 @@
 <template>
   <div class="play">
-        <LoadingScreen
-          :showLoadingScreen="showLoadingScreen"
-          :title="loadingScreenTitle"
-        />
-        <Lightbox
-          v-if="isLightboxActive || userLife < 1"
-          v-on:click.native="isLightboxActive = false"
-          :title="lightboxTitle"
-          :image="lightboxImage"
-          :content="lightboxContent"
-        />
-        <ImageFullBackground />
-        <Header
-          :rounds="rounds"
-          :sounds="sounds"
-          :userScore="userScore"
-          :userLife="userLife"
-          :highlightNewRound="highlightNewRound"
-        />
-        <!-- OVERLAY
-        <div class="pageOverlay">
-            <div class="correctAnswer displayNone" ng-class="currentOverlay === 1 && lifes > 0 ? '' : 'displayNone'"></div>
-            <div class="finalAnswer displayNone" ng-class="currentOverlay === 2 && lifes > 0 ? '' : 'displayNone'">
-                <div class="overlayTitle">Good Job!</div>
-                <div></div>
+    <LoadingScreen
+      :showLoadingScreen="showLoadingScreen"
+      :title="loadingScreenTitle"
+    />
+    <Lightbox
+      v-if="isLightboxActive || userLife < 1"
+      v-on:click.native="isLightboxActive = false"
+      :title="lightboxTitle"
+      :image="lightboxImage"
+      :content="lightboxContent"
+    />
+    <ImageFullBackground />
+    <Header
+      :rounds="rounds"
+      :sounds="sounds"
+      :userScore="userScore"
+      :userLife="userLife"
+      :highlightNewRound="highlightNewRound"
+    />
+    <!-- OVERLAY
+    <div class="pageOverlay">
+        <div class="gameOver displayNone" ng-class="currentOverlay === 4 && lifes === 0 ? '' : 'displayNone'">
+            <div class="overlayTitle">Game Over!</div>
+            <div class="overlaySubTtle">Your score is ♪!</div><br/>
+            <div class="resetButton">
+                <a href="https://twitter.com/intent/tweet?text=@kibwashere, YAY!!%20I%20scored%20 todo score %20♪%20on%20%23pizzaphonic" target="_blank"  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
+                    <span>Tweet it</span>
+                </a>
             </div>
-            <div class="gameOver displayNone" ng-class="currentOverlay === 4 && lifes === 0 ? '' : 'displayNone'">
-                <div class="overlayTitle">Game Over!</div>
-                <div class="overlaySubTtle">Your score is ♪!</div><br/>
-                <div class="resetButton">
-                    <a href="https://twitter.com/intent/tweet?text=@kibwashere, YAY!!%20I%20scored%20 todo score %20♪%20on%20%23pizzaphonic" target="_blank"  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
-                        <span>Tweet it</span>
-                    </a>
-                </div>
-                <div class="resetButton" >Try again</div>
-            </div>
-        </div> -->
-        <!-- END OF THE OVERLAY -->
-        <!-- SUCH GREAT VISUAL -->
-        <ButtonSound
-          :rounds="rounds"
-          :sounds="sounds"
-        />
-        <!-- END OF THE SUCH GREAT VISUAL -->
-        <!-- MAIN CONTENT
-        <div class="page">
-            <div class="content">
-                LOADING PIZZA
-                <div class="loadingPizza"></div>
-                END OF LOADING PIZZA
-            </div>
+            <div class="resetButton" >Try again</div>
         </div>
-        END OF MAIN CONTENT -->
-        <InputAnswer />
+    </div> -->
+    <ButtonSound
+      :rounds="rounds"
+      :sounds="sounds"
+    />
+    <InputAnswer />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import EventBus from '@/components/EventBus'
+import { preload } from '@kznjunk/pre-load'
 
 import LoadingScreen from '@/components/Game/LoadingScreen.vue'
 import Lightbox from '@/components/Game/Lightbox.vue'
@@ -92,95 +76,46 @@ export default {
       userScore: 0,
       userLife: 5,
       isLightboxActive: false,
+      lightbox: {
+        title: null,
+        image: null,
+        content: null // to use
+      },
       lightboxTitle: null,
       lightboxImage: null,
-      lightboxContent: null,
-      imgsToPreload: [
+      lightboxContent: null
+    }
+  },
+  async created () {
+    this.rounds = [ this.gameData.round ]
+    this.sounds = [ this.gameData.sounds ]
+
+    this.preloadItems()
+    this.listenCurrentRound()
+    this.listenUserAnswer()
+  },
+  methods: {
+    async preloadItems () {
+      const host = 'https://di3xllda87oyr.cloudfront.net'
+      const type = 'sounds'
+      const folderName = `1-popular`
+      const extension = '.wav'
+      const sndsToPreload = this.gameData.sounds.map(snd => `${host}/${type}/${folderName}/${snd.soundFileName}${extension}`)
+      const imgsToPreload = [
         require('@/assets/lifeY.png'),
         require('@/assets/lifeN.png'),
         require('@/assets/bg.jpg'),
         'https://images.unsplash.com/photo-1556040142-f86cda4b2819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=100'
       ]
-    }
-  },
-  async created () {
-    console.log('-- in created')
-    this.rounds = [ this.gameData.round ]
-    this.sounds = [ this.gameData.sounds ]
-    this.listenCurrentRound()
-    this.listenUserAnswer()
 
-    console.log('pre loaded')
+      await Promise.all([
+        preload(imgsToPreload, () => { this.loadingScreenTitle = 'gogo' }),
+        preload(sndsToPreload, () => { this.loadingScreenTitle = 'gogo goooooo' })
+      ])
 
-    const host = 'https://di3xllda87oyr.cloudfront.net'
-    const type = 'sounds'
-    const folderName = `1-popular`
-    const extension = '.wav'
-    const sndsToPreload = this.gameData.sounds.map(snd => `${host}/${type}/${folderName}/${snd.soundFileName}${extension}`)
-
-    await Promise.all([
-      this.preLoadImages(this.imgsToPreload),
-      this.preLoadSounds(sndsToPreload)
-    ])
-
-    console.log('all loaded')
-  },
-  mounted () {
-    console.log('-- in mounted')
-
-    window.setTimeout(() => {
-      this.showLoadingScreen = false
-    }, 1000)
-  },
-  methods: {
-    async preLoadImages (imgs) {
-      return new Promise(resolve => {
-        const imgsToPreloadPromises = [ ]
-
-        for (let i = 0; i < imgs.length; i++) {
-          const imgToPreload = imgs[i]
-          imgsToPreloadPromises.push(this.preLoadImage(imgToPreload))
-        }
-
-        Promise.all(imgsToPreloadPromises)
-          .then(values => {
-            resolve()
-          })
-      })
-    },
-    async preLoadImage (imgToPreload) {
-      return new Promise(resolve => {
-        const img = new Image()
-        img.onload = () => {
-          console.log('img loaded')
-          // this.imgUrl = img.src;
-          // this.showImg = true;
-          resolve()
-        }
-        img.src = imgToPreload
-      })
-    },
-    async preLoadSounds (snds) {
-      return new Promise(resolve => {
-        const sndsToPreloadPromises = [ ]
-
-        for (let i = 0; i < snds.length; i++) {
-          const sndToPreload = snds[i]
-          sndsToPreloadPromises.push(this.preLoadSound(sndToPreload))
-        }
-
-        Promise.all(sndsToPreloadPromises)
-          .then(values => {
-            resolve()
-          })
-      })
-    },
-    async preLoadSound (sndToPreload) {
-      return new Promise(resolve => {
-        const audio = new Audio()
-        audio.addEventListener('canplaythrough', resolve, false)
-        audio.src = sndToPreload
-      })
+      window.setTimeout(() => {
+        this.showLoadingScreen = false
+      }, 2000)
     },
     listenCurrentRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
