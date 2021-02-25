@@ -34,7 +34,16 @@ export default {
         rank: 'RANKED MODE'
     },
     play: {
+        inputPlaceholder: 'Type your answer here',
+        loading: {
 
+        },
+        success: {
+
+        },
+        fail: {
+
+        }
     },
     footer: {
         meh: '© 2021 - <a href="https://twitter.com/kibwashere" target="_blank">@kibwashere</a>'

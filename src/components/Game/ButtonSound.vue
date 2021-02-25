@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import EventBus from "@/components/EventBus";
+import EventBus from '@/components/EventBus'
+import { getSound } from '@/helpers'
 
 export default {
   props: {
@@ -37,12 +38,9 @@ export default {
     })
   },
   methods: {
-    playSound (roundId, soundFileName) {
-      const host = 'https://di3xllda87oyr.cloudfront.net'
-      const type = 'sounds'
+    playSound (roundId, fileName) {
       const folderName = `${roundId}-${this.rounds[roundId - 1]['folderName']}`
-      const extension = '.wav'
-      const soundUrl = `${host}/${type}/${folderName}/${soundFileName}${extension}`
+      const soundUrl = getSound(folderName, fileName)
 
       if (this.currentPlayableSound) this.currentPlayableSound.pause()
       this.currentPlayableSound = new Audio(soundUrl)

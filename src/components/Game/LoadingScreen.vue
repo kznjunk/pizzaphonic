@@ -1,21 +1,37 @@
 <template >
     <div
         class="loading-screen"
-        v-bind:class="{ 'hide-loading-screen': !showLoadingScreen }"
+        v-bind:class="{ 'hide-loading-screen': !loading.enable }"
     >
       <div class="overlay"></div>
       <div class="content">
             <img alt="Pizzaphonic" src="@/assets/pp-only.png" />
             <p>{{ title }}</p>
+            <ProgressBar
+                :fromValue="fromProgressBar"
+                :toValue="loading.current"
+            />
+            <p>Loading...</p>
       </div>
     </div>
 </template>
 
 <script>
+import ProgressBar from "@/components/Game/ProgressBar.vue"
+
 export default {
+  components: {
+    ProgressBar
+  },
   props: {
-      showLoadingScreen: Boolean,
+      loading: Object,
       title: String
+  },
+  data() {
+    return {
+      fromProgressBar: 0,
+      toProgressBar: 60
+    }
   }
 }
 </script>

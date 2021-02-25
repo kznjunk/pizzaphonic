@@ -1,8 +1,8 @@
 <template>
   <div class="play">
     <LoadingScreen
-      :showLoadingScreen="showLoadingScreen"
       :title="loadingScreenTitle"
+      :loading="loading"
     />
     <Lightbox
       v-if="isLightboxActive || userLife < 1"
@@ -42,9 +42,11 @@
 
 <script>
 import axios from 'axios'
-import EventBus from '@/components/EventBus'
+import { mapState } from 'vuex'
 import { preload } from '@kznjunk/pre-load'
 
+import { getImage, getSound } from '@/helpers'
+import EventBus from '@/components/EventBus'
 import LoadingScreen from '@/components/Game/LoadingScreen.vue'
 import Lightbox from '@/components/Game/Lightbox.vue'
 import ImageFullBackground from '@/components/Game/ImageFullBackground.vue'
@@ -67,7 +69,12 @@ export default {
   },
   data: function(){
     return {
-      showLoadingScreen: true,
+      loading: {
+        enable: true,
+        from: 0,
+        to: 100,
+        current: 0
+      },
       loadingScreenTitle: 'Round 1: Popular Games',
       rounds: null,
       sounds: null,
@@ -96,26 +103,29 @@ export default {
   },
   methods: {
     async preloadItems () {
-      const host = 'https://di3xllda87oyr.cloudfront.net'
-      const type = 'sounds'
-      const folderName = `1-popular`
-      const extension = '.wav'
-      const sndsToPreload = this.gameData.sounds.map(snd => `${host}/${type}/${folderName}/${snd.soundFileName}${extension}`)
+      const sndsToPreload = this.gameData.sounds.map(snd => getSound('1-popular', snd.soundFileName))
       const imgsToPreload = [
-        require('@/assets/lifeY.png'),
-        require('@/assets/lifeN.png'),
-        require('@/assets/bg.jpg'),
-        'https://images.unsplash.com/photo-1556040142-f86cda4b2819?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=100'
+        // require('@/assets/lifeY.png'),
+        // require('@/assets/lifeN.png'),
+        // require('@/assets/bg.jpg')
       ]
+      const itemsToPreload = sndsToPreload.concat(imgsToPreload)
 
-      await Promise.all([
-        preload(imgsToPreload, () => { this.loadingScreenTitle = 'gogo' }),
-        preload(sndsToPreload, () => { this.loadingScreenTitle = 'gogo goooooo' })
-      ])
+      await preload(itemsToPreload, { cb_foreach: this.updateLoadingScreen })
 
       window.setTimeout(() => {
-        this.showLoadingScreen = false
+        this.loading.enable = false
       }, 2000)
+      window.setTimeout(() => {
+        this.loading.current = 0
+      }, 3000) 
+    },
+    updateLoadingScreen () {
+      this.loading.current = this.loading.current + 12.5
+      console.log(this.loading.current)
+      // this.loadingScreenStep++
+      // this.loadingScreenTitle = 
+      // this.loadingScreenProgress = 
     },
     listenCurrentRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
@@ -155,21 +165,14 @@ export default {
     handleGoodAnswer (answerData, gameData) {
       const { id, name, imgUrl } = answerData
       const { round, sounds } = gameData
-      const imageUrl = this.getImageUrl(imgUrl)
+      const folderName = `${this.currentRound}-${this.rounds[this.currentRound - 1]['folderName']}`
+      const imageUrl = getImage(folderName, imgUrl)
       this.userScore++
       const isNewRound = this.userScore % 3 === 0 && this.rounds.some(item => item.name !== round.name)
 
       this.addImageInBubble(id, imageUrl)
       this.showGoodAnswerLightbox(imageUrl)
       if (isNewRound) this.unlockNextRound(round, sounds)
-    },
-    getImageUrl(imgUrl) {
-      const host = 'https://di3xllda87oyr.cloudfront.net'
-      const type = 'images'
-      const folderName = `${this.currentRound}-${this.rounds[this.currentRound - 1]['folderName']}`
-      const extension = '.png'
-
-      return `${host}/${type}/${folderName}/${imgUrl}${extension}`
     },
     addImageInBubble (id, imageUrl) {
       const soundIndex = this.sounds[this.currentRound - 1].findIndex(sound => sound.id === id)
@@ -188,9 +191,24 @@ export default {
         this.isLightboxActive = false
       }, 3000)
     },
-    unlockNextRound(round, sounds) {
+    async unlockNextRound(round, sounds) {
+      this.loading.current = 0
+      this.loading.enable = true
       this.rounds.push(round)
       this.sounds.push(sounds)
+
+      const folderName = `${this.rounds.length}-${round.folderName}`
+      const sndsToPreload = sounds.map(snd => getSound(folderName, snd.soundFileName))
+
+      await preload(sndsToPreload, { cb_foreach: this.updateLoadingScreen })
+
+      window.setTimeout(() => {
+        this.loading.enable = false
+      }, 2000)
+      window.setTimeout(() => {
+        this.loading.current = 0
+      }, 3000) 
+
       this.highlightNewRound = true
     },
     handleWrongAnswer () {
@@ -205,6 +223,11 @@ export default {
         this.isLightboxActive = true
       }
     }
+  },
+  computed: {
+    ...mapState({
+      play: state => state.play
+    })
   }
 }
 </script>
