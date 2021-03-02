@@ -36,10 +36,15 @@ export default {
     play: {
         inputPlaceholder: 'Type your answer here',
         loading: {
-
+            title: 'Loading',
+            tips: [
+                'Did you know: this page is a loading page.',
+                'Tip: tips might appear over here.',
+                'Did you know: nothing Jon Snow',
+                'Did you know: you can change the round using the arrows'
+            ]
         },
         success: {
-
         },
         fail: {
 

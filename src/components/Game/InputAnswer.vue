@@ -23,7 +23,7 @@
 
 <script>
 import EventBus from "@/components/EventBus"
-import IconSend from "@/components/Game/IconSend.vue"
+import IconSend from "@/components/Game/Icons/Send.vue"
 
 export default {
   components: {

@@ -6,24 +6,24 @@
         <div class="play-header-center">
             <ButtonRound
                 :rounds="rounds"
-                :highlightNewRound="highlightNewRound"
+                :highlightNewRound="user.hasSeenNextRound"
             />
         </div>
         <div class="play-header-right">
             <IconLife
-                :userLife="userLife"
+                :userLife="user.life"
             />
         </div>
         <div class="play-header-right score">
-            {{ userScore }} / {{ sounds.reduce((a, b) => a + b.length, 0) }} ♪
+            {{ user.score }} / {{ sounds.reduce((a, b) => a + b.length, 0) }} ♪
         </div>
     </div>
 </template>
 
 <script>
-import IconLife from "@/components/Game/IconLife.vue"
-import IconExit from "@/components/Game/IconExit.vue"
-import ButtonRound from "@/components/Game/ButtonRound.vue"
+import IconLife from "@/components/Game/Icons/Life.vue"
+import IconExit from "@/components/Game/Icons/Exit.vue"
+import ButtonRound from "@/components/Game/Buttons/Round.vue"
 
 export default {
   components: {
@@ -34,13 +34,9 @@ export default {
   props: {
     rounds: Array,
     sounds: Array,
-    userScore: Number,
-    userLife: Number,
-    highlightNewRound: Boolean
+    user: Object
   },
   created () {
-      console.log('---wv')
-    console.log(this.sounds.length)
   }
 }
 </script>
