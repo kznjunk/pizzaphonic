@@ -1,12 +1,12 @@
 <template>
   <div class="loading">
     <div v-if="!loading.ready">
-        {{ play.loading.title }}<span class="loading-dot1">.</span>
+        {{ play.loading.wip }}<span class="loading-dot1">.</span>
         <span class="loading-dot2">.</span>
         <span class="loading-dot3">.</span>
     </div>
     <div v-else class="loading-dot2">
-        - Ready -
+        - {{ play.loading.done }} -
     </div>
     <div class="progress-bar">
       <div v-bind:style="{ width: loading.current + '%' }"></div>

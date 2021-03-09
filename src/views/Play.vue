@@ -4,6 +4,7 @@
       <Overlay
         v-if="loading.enable || lightbox.enable || user.life < 1"
         v-on:click.native="hideOverlay()"
+        :user="user"
         :loading="loading"
         :lightbox="lightbox"
       />
@@ -14,19 +15,6 @@
       :sounds="sounds"
       :user="user"
     />
-    <!-- OVERLAY
-    <div class="pageOverlay">
-        <div class="gameOver displayNone" ng-class="currentOverlay === 4 && lifes === 0 ? '' : 'displayNone'">
-            <div class="overlayTitle">Game Over!</div>
-            <div class="overlaySubTtle">Your score is ♪!</div><br/>
-            <div class="resetButton">
-                <a href="https://twitter.com/intent/tweet?text=@kibwashere, YAY!!%20I%20scored%20 todo score %20♪%20on%20%23pizzaphonic" target="_blank"  onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
-                    <span>Tweet it</span>
-                </a>
-            </div>
-            <div class="resetButton" >Try again</div>
-        </div>
-    </div> -->
     <ButtonSound
       :rounds="rounds"
       :sounds="sounds"
@@ -58,7 +46,8 @@ export default {
   },
   props: {
     token: String,
-    gameData: Object
+    gameData: Object,
+    userData: Object
   },
   data: function(){
     return {
@@ -101,6 +90,7 @@ export default {
     this.preloadItems(itemsToPreload)
     this.listenActiveRound()
     this.listenUserAnswer()
+    window.addEventListener('beforeunload', this.safetyExit)
   },
   methods: {
     hideOverlay () {
@@ -175,7 +165,7 @@ export default {
       if (isNewRound) {
         this.unlockNextRound(round, sounds)
       } else {
-        this.showGoodAnswerLightbox(imageUrl)
+        this.showGoodAnswerLightbox(imageUrl, isNewRound)
       }
 
       this.addImageInBubble(id, imageUrl)
@@ -186,17 +176,20 @@ export default {
 
       this.$set(soundsPath, 'imgUrl', imageUrl)
     },
-    showGoodAnswerLightbox (imageUrl) {
-      this.lightbox.title = 'Nice one!'
-      this.lightbox.image = imageUrl
-      this.lightbox.content = 'Such wow'
+    showGoodAnswerLightbox (imageUrl, isNewRound) {
+      const titles = this.play.success.titles
+      const titleIndex = Math.floor(Math.random() * titles.length)
+      this.lightbox.title = titles[titleIndex]
+      // this.lightbox.image = imageUrl
       this.lightbox.enable = true
 
-      window.setTimeout(() => {
-        // this.lightbox.enable = false
-      }, 3000)
+        window.setTimeout(() => {
+          this.lightbox.enable = false
+        }, 3000)
     },
     async unlockNextRound(round, sounds) {
+      this.lightbox.title = 'You unlocked a new round!'
+
       this.loading.current = 0
       this.loading.enable = true
       this.rounds.push(round)
@@ -214,12 +207,33 @@ export default {
       audio.play()
 
       if (this.user.life < 1) {
-        this.lightbox.title = 'You died.'
-        this.lightbox.image = null
-        this.lightbox.content = `Not very impressive score: ${this.user.score}, have another try?`
+        const titles = this.play.fail.titles
+        const titleIndex = Math.floor(Math.random() * titles.length)
+        this.lightbox.title = titles[titleIndex]
+
+        const subTitles = this.play.fail.subTitles[this.user.score % 10]
+        const subTitleIndex = Math.floor(Math.random() * subTitles.length)
+        this.lightbox.content = subTitles[subTitleIndex].replace('{{x}}', `${this.user.score} ♪`)
+
         this.lightbox.enable = true
       }
+    },
+    safetyExit (e) {
+      const safetyLeave = this.play.safetyLeave
+      e.returnValue = this.play.safetyLeave
+      return safetyLeave
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    const isStillAlive = this.user.life > 0
+
+    if (isStillAlive) {
+      if (!window.confirm(this.play.safetyLeave)) {
+        return
+      }
+    }
+
+    next()
   },
   computed: {
     ...mapState({

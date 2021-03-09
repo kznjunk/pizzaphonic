@@ -8,7 +8,7 @@
         </button>
         <span
             v-for="(round, index) in rounds"
-            class="round-name"
+            class="round-name font-akaya"
             v-bind:class="{ 'active': currentRound === index + 1 }"
             :data-round="index + 1"
         >
@@ -84,7 +84,6 @@ export default {
 .round-name {
     display: none;
     margin: 0px 30px;
-    font-family: Game;
 }
 .round-name.active {
     display: inline-block;

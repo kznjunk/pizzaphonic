@@ -14,7 +14,7 @@
                 :userLife="user.life"
             />
         </div>
-        <div class="play-header-right score">
+        <div class="play-header-right score font-akaya">
             {{ user.score }} / {{ sounds.reduce((a, b) => a + b.length, 0) }} ♪
         </div>
     </div>

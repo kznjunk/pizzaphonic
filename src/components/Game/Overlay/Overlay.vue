@@ -13,6 +13,7 @@
         />
         <Lightbox
             v-else
+            :user="user"
             :lightbox="lightbox"
         />
     </div>
@@ -28,6 +29,7 @@ export default {
     Lightbox
   },
   props: {
+    user: Object,
     loading: Object,
     lightbox: Object
   }

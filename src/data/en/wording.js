@@ -34,9 +34,11 @@ export default {
         rank: 'RANKED MODE'
     },
     play: {
+        safetyLeave: 'You are about to lost your progress. Are you sure you want to leave?',
         inputPlaceholder: 'Type your answer here',
         loading: {
-            title: 'Loading',
+            wip: 'Loading level {{x}}',
+            done: 'Ready',
             tips: [
                 'Did you know: this page is a loading page.',
                 'Tip: tips might appear over here.',
@@ -45,9 +47,58 @@ export default {
             ]
         },
         success: {
+            titles: [
+                'Nice one!',
+                'Easy one'
+            ]
         },
         fail: {
-
+            titles: [
+                '- Game Over -',
+                '- You died -'
+            ],
+            subTitles: {
+                0: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                1: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                2: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                3: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                4: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                5: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                6: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                7: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                8: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ],
+                9: [
+                    'Not very impressive score: {{x}}',
+                    'Even my gradma can do better: {{x}}'
+                ]
+            }
         }
     },
     footer: {

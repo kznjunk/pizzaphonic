@@ -48,10 +48,13 @@ export default {
   components: {
     ButtonMenu
   },
+  props: {
+    userData: Object
+  },
   data: function(){
     return {
-        pseudo: null,
-        email: null,
+        pseudo: (this.userData && this.userData.pseudo) || null,
+        email: (this.userData && this.userData.email) || null,
         isErrorPseudo: false,
         isErrorEmail: false
     }
@@ -88,9 +91,10 @@ export default {
                 const data = response.data
                 const token = data && data.token
                 const gameData = data && data.game
+                const userData = { email: this.email, pseudo: this.pseudo } 
 
                 if (token && gameData) {
-                    this.$router.push({ name: 'Play', params: {token, gameData } })
+                    this.$router.push({ name: 'Play', params: {token, gameData, userData } })
                 } else {
                     console.log('hmm show err')
                 }
