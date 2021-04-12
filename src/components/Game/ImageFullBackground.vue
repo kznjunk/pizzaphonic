@@ -18,7 +18,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  background-image: url('~@/assets/bg.jpg');
+  background-image: url('~@/assets/bggg.jpg');
   background-size: cover;
   position: fixed;
   width: 100%;
@@ -28,10 +28,10 @@ export default {
   z-index: -1;
   animation-name: backgroundAnimation;
   animation-duration: 6s;
-  -webkit-filter: blur(0px) grayscale(95%);
-  -moz-filter: blur(0px) grayscale(95%);
-  -o-filter: blur(0px) grayscale(95%);
-  -ms-filter: blur(0px) grayscale(95%);
-  filter: blur(0px) grayscale(95%);
+  -webkit-filter: blur(0px) grayscale(95%) brightness(50%);
+  -moz-filter: blur(0px) grayscale(95%) brightness(50%);
+  -o-filter: blur(0px) grayscale(95%) brightness(50%);
+  -ms-filter: blur(0px) grayscale(95%) brightness(50%);
+  filter: blur(0px) grayscale(95%) brightness(50%);
 }
 </style>

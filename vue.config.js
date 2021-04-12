@@ -10,9 +10,9 @@ module.exports = {
         }
     },
     devServer: {
-        port: 92,
+        port: 82,
         proxy: 'http://localhost:3000',
-        public: 'http://pizzaphonic.com/',
+        public: 'http://dev.pizzaphonic.com/',
         disableHostCheck: true
     }
 }

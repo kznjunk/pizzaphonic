@@ -14,6 +14,7 @@
       :rounds="rounds"
       :sounds="sounds"
       :user="user"
+      :secrets="secrets"
     />
     <ButtonSound
       :rounds="rounds"
@@ -27,6 +28,7 @@
 import axios from 'axios'
 import { mapState } from 'vuex'
 import { preload } from '@kznjunk/pre-load'
+import konami from '@kznjunk/konami'
 
 import { getImage, getSound } from '@/helpers'
 import EventBus from '@/components/EventBus'
@@ -53,11 +55,15 @@ export default {
     return {
       rounds: null,
       sounds: null,
+      secrets: [ false, false, false ],
       user: {
         score: 0,
         life: 5,
         activeRound: 1,
-        hasSeenNextRound: false
+        hasSeenNextRound: false,
+        answers: [ ],
+        email: null,
+        pseudo: null
       },
       loading: {
         isFirst: true,
@@ -76,6 +82,8 @@ export default {
     }
   },
   async created () {
+    this.user.email = this.userData.email
+    this.user.pseudo = this.userData.pseudo
     this.rounds = [ this.gameData.round ]
     this.sounds = [ this.gameData.sounds ]
 
@@ -91,6 +99,7 @@ export default {
     this.listenActiveRound()
     this.listenUserAnswer()
     window.addEventListener('beforeunload', this.safetyExit)
+    konami(this.showSecret)
   },
   methods: {
     hideOverlay () {
@@ -141,7 +150,9 @@ export default {
               const data = response.data
               const answerData = data && data.answerData
               const gameData = data && data.gameData
-
+console.log('-- bwop')
+console.log(answerData)
+console.log(gameData)
               if (answerData && gameData) {
                 this.handleGoodAnswer(answerData, gameData)
               } else {
@@ -222,6 +233,9 @@ export default {
       const safetyLeave = this.play.safetyLeave
       e.returnValue = this.play.safetyLeave
       return safetyLeave
+    },
+    showSecret () {
+      console.log('yay!')
     }
   },
   beforeRouteLeave(to, from, next) {

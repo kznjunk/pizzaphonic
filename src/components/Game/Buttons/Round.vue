@@ -89,7 +89,7 @@ export default {
     display: inline-block;
 }
 .arrow {
-    width: 25px;
+    width: 18px;
 }
 .arrow-prev {
     transform: rotate(180deg);

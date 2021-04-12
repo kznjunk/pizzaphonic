@@ -117,4 +117,9 @@ export default {
     height: 30px;
   }
 }
+@media screen and (min-width: 600px) {
+  .pizzas > div {
+    width: 75%;
+  }
+}
 </style>

@@ -48,16 +48,21 @@ export default {
   components: {
     ButtonMenu
   },
-  props: {
-    userData: Object
-  },
   data: function(){
     return {
-        pseudo: (this.userData && this.userData.pseudo) || null,
-        email: (this.userData && this.userData.email) || null,
+        pseudo: null,
+        email: null,
         isErrorPseudo: false,
         isErrorEmail: false
     }
+  },
+  async created () {
+      const userData = this.$route && this.$route.params && this.$route.params.userData
+
+      if (userData) {
+        this.pseudo = userData.savedPseudo
+        this.email = userData.savedEmail
+      }
   },
   methods: {
     guestSubscribe () {
@@ -116,7 +121,6 @@ export default {
         return false
     },
     isValidEmail (email) {
-        console.log(email)
         if (email) {
             const isGoodType = typeof email === 'string'
             const isLengthValid = email.length >= 5 && email.length <= 150

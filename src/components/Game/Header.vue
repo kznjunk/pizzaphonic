@@ -8,6 +8,9 @@
                 :rounds="rounds"
                 :highlightNewRound="user.hasSeenNextRound"
             />
+            <IconKey
+                :secrets="secrets"
+            />
         </div>
         <div class="play-header-right">
             <IconLife
@@ -21,12 +24,14 @@
 </template>
 
 <script>
+import IconKey from "@/components/Game/Icons/Key.vue"
 import IconLife from "@/components/Game/Icons/Life.vue"
 import IconExit from "@/components/Game/Icons/Exit.vue"
 import ButtonRound from "@/components/Game/Buttons/Round.vue"
 
 export default {
   components: {
+    IconKey,
     IconLife,
     IconExit,
     ButtonRound
@@ -34,7 +39,8 @@ export default {
   props: {
     rounds: Array,
     sounds: Array,
-    user: Object
+    user: Object,
+    secrets: Array
   },
   created () {
   }
@@ -62,15 +68,14 @@ export default {
         align-items: center;
         justify-content: center;
     }
-
     .play-header-center {
         height: 40px;
         font-size: 24px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
-
     .play-header-right {
         right: 20px;
         height: 40px;

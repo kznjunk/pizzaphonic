@@ -34,7 +34,7 @@ export default {
     resetGame () {
       this.$router.push({
         name: 'Login',
-        params: { noWarning: true }
+        params: { noWarning: true, userData: { savedEmail: this.user.email, savedPseudo: this.user.pseudo } }
       })
     },
     tweetScore () {
