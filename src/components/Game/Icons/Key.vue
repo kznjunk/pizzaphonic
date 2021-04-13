@@ -1,9 +1,10 @@
 <template>
     <div class="play-keys">
         <router-link
-            v-for="secret in secrets" :key="secret"
-            :to="(secret && secret.target) || ''"
-            :class="secret && secret.target ? '' : 'locked'"
+            v-for="(secret, index) in secrets" :key="index"
+            :disabled="!secret" 
+            :to="secret || '/locked'"
+            :class="secret ? '' : 'locked'"
         >
             <img
                 src="@/assets/key.png"
@@ -18,6 +19,10 @@
 export default {
   props: {
     secrets: Array
+  },
+  created() {
+    console.log('--- aze')
+    console.log(this.secrets)
   }
 }
 </script>
@@ -28,7 +33,7 @@ export default {
     position: absolute;
 }
 a {
-    padding: 5px;
+    padding: 0px 5px;
     margin: 0px 5px;
     position: relative;
     img {
@@ -45,12 +50,15 @@ a.locked img {
 a::before {
     content: "";
     display: block;
-    box-shadow: inset 0 0 5px white;
+    box-shadow: inset 0 0 5px yellow;
     border-radius: 50px;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+}
+a.locked::before {
+    box-shadow: inset 0 0 5px white;
 }
 </style>

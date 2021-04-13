@@ -18,7 +18,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  background-image: url('~@/assets/bggg.jpg');
+  background-image: url('~@/assets/bgggm.png');
   background-size: cover;
   position: fixed;
   width: 100%;
@@ -33,5 +33,10 @@ export default {
   -o-filter: blur(0px) grayscale(95%) brightness(50%);
   -ms-filter: blur(0px) grayscale(95%) brightness(50%);
   filter: blur(0px) grayscale(95%) brightness(50%);
+}
+@media screen and (min-width: 681px) {
+  .game-background {
+    background-image: url('~@/assets/bggg.jpg');
+  }
 }
 </style>

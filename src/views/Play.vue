@@ -154,6 +154,9 @@ console.log('-- bwop')
 console.log(answerData)
 console.log(gameData)
               if (answerData && gameData) {
+                this.$set(this.secrets, 2, 'bwop')
+                console.log(this.secrets)
+
                 this.handleGoodAnswer(answerData, gameData)
               } else {
                 this.handleWrongAnswer()
