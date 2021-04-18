@@ -59,7 +59,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  background-image: url('~@/assets/bgggm.png');
+  background-image: url('~@/assets/bg-m.png');
 
   background-size: cover;
   animation-name: backgroundAnimation;
@@ -72,7 +72,7 @@ export default {
 }
 @media screen and (min-width: 681px) {
   .game-background-img {
-    background-image: url('~@/assets/bggg.jpg');
+    background-image: url('~@/assets/bg.jpg');
   }
 }
 </style>

@@ -20,10 +20,6 @@
 export default {
   props: {
     secrets: Array
-  },
-  created() {
-    console.log('--- aze')
-    console.log(this.secrets)
   }
 }
 </script>

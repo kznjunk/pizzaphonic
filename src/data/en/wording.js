@@ -38,8 +38,11 @@ export default {
         inputPlaceholder: 'Type your answer here',
         loading: {
             titles: [
-                'Nice one!',
-                'Easy one'
+                'You unlocked a new round!',
+                'Next round is there!',
+                'Nice one! New songs for you',
+                'Yay! Check out this new round',
+                'Next round has been done for you'
             ],
             wip: 'Loading level {{x}}',
             done: 'Ready',
@@ -54,59 +57,63 @@ export default {
         success: {
             titles: [
                 'Nice one!',
-                'Easy one'
+                'Easy one!',
+                'Annnnd another one!',
+                'Stop cheating!',
+                'Do you even know this game?',
+                'Great Scott!',
+                'To infinity and beyond!',
+                'Fantastic!',
+                'Try not. Do, or do not. There is no try.',
+                'Worst. Episode. Ever.',
+                'This is the way!' // need more
             ]
         },
         fail: {
             titles: [
                 '- Game Over -',
-                '- You died -'
+                '- You died -',
+                '- Wasted -',
+                '- Time... to die -'
             ],
             subTitles: {
                 0: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Hmm, at least you tried: {{x}}',
+                    'You scored {{x}}, is it also your age?',
                 ],
                 1: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Really - not - impressive score: {{x}}',
+                    'Not even close to something respectful: {{x}}'
                 ],
                 2: [
-                    'Not very impressive score: {{x}}',
+                    'Maybe you should try to cheat: {{x}}',
                     'Even my gradma can do better: {{x}}'
                 ],
                 3: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'You\'ll be back: {{x}}',
                 ],
                 4: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Houston, we have a problem. {{x}}',
                 ],
                 5: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Why so serious? {{x}}',
                 ],
                 6: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'After so many tries, you scored: {{x}}'
                 ],
                 7: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'The Force was with you: {{x}}'
                 ],
                 8: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Did you found the answers on Reddit? {{x}}'
                 ],
                 9: [
-                    'Not very impressive score: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Are you the developer of this game? {{x}}'
                 ]
             }
         }
     },
     footer: {
-        meh: '© 2021 - <a href="https://twitter.com/kibwashere" target="_blank">@kibwashere</a>'
+        meh: '© {{YYYY}} - <a href="https://twitter.com/kibwashere" target="_blank">@kibwashere</a>'
     }
 }

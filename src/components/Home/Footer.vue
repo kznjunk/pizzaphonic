@@ -1,10 +1,12 @@
 <template>
   <footer>
-    <div v-html="footer.meh">
-      {{ footer.meh }}
+    <div v-html="footerMsg">
+      {{ footerMsg }}
     </div>
   </footer>
 </template>
+
+footer
 
 <script>
 import { mapState } from 'vuex'
@@ -13,6 +15,17 @@ import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 export default {
   components: {
     ButtonMenu
+  },
+  data: function(){
+    return {
+      footerMsg: ''
+    }
+  },
+  created() {
+    const now = new Date()
+    const YYYY = now.getFullYear()
+
+    this.footerMsg = this.footer.meh.replace('{{YYYY}}', YYYY)
   },
   computed: {
     ...mapState({
@@ -37,4 +50,3 @@ footer {
   animation: noiceBorderColor .5s linear 0s infinite;
 }
 </style>
-
