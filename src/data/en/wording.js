@@ -37,13 +37,18 @@ export default {
         safetyLeave: 'You are about to lost your progress. Are you sure you want to leave?',
         inputPlaceholder: 'Type your answer here',
         loading: {
+            titles: [
+                'Nice one!',
+                'Easy one'
+            ],
             wip: 'Loading level {{x}}',
             done: 'Ready',
             tips: [
                 'Did you know: this page is a loading page.',
                 'Tip: tips might appear over here.',
                 'Did you know: nothing Jon Snow',
-                'Did you know: you can change the round using the arrows'
+                'Did you know: you can change the round using the arrows',
+                'Score 42 to unlock the secret key!'
             ]
         },
         success: {

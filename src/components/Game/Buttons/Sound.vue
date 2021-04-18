@@ -122,4 +122,8 @@ export default {
     width: 75%;
   }
 }
+
+.suchWow .pizza {
+  animation: noiceBorderColor .5s linear 0s infinite;
+}
 </style>

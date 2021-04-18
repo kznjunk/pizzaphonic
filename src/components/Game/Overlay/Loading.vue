@@ -1,7 +1,8 @@
 <template>
   <div class="loading">
+    <h2 v-if="loading.title" class="font-akaya">{{ loading.title }}</h2>
     <div v-if="!loading.ready">
-        {{ play.loading.wip }}<span class="loading-dot1">.</span>
+        {{ wipMessage }}<span class="loading-dot1">.</span>
         <span class="loading-dot2">.</span>
         <span class="loading-dot3">.</span>
     </div>
@@ -24,11 +25,13 @@ export default {
   },
   data: function(){
     return {
-      index: null
+      index: null,
+      wipMessage: '',
     }
   },
   created() {
     this.tipIndex = Math.floor(Math.random() * this.play.loading.tips.length)
+    this.wipMessage = this.play.loading.wip.replace('{{x}}', this.loading.unlockedRound)
   },
   computed: {
     ...mapState({

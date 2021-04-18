@@ -33,5 +33,8 @@ footer {
   border-top: 1px solid $blue-color;
   background-color: black;
 }
+.suchWow footer {
+  animation: noiceBorderColor .5s linear 0s infinite;
+}
 </style>
 

@@ -1,18 +1,19 @@
 <template>
     <div class="play-keys">
-        <router-link
+        <a
             v-for="(secret, index) in secrets" :key="index"
             :disabled="!secret" 
-            :to="secret || '/locked'"
+            :href="secret || '#'"
             :class="secret ? '' : 'locked'"
+            target="_blank"
         >
             <img
                 src="@/assets/key.png"
                 alt="secret"
                 rel="preload"
             />
-        </router-link>
-        </div>
+        </a>      
+    </div>
 </template>
 
 <script>
@@ -46,6 +47,9 @@ a.locked img {
     -o-filter: blur(0px) grayscale(95%);
     -ms-filter: blur(0px) grayscale(95%);
     filter: blur(0px) grayscale(95%);
+}
+a.locked {
+    pointer-events: none;
 }
 a::before {
     content: "";

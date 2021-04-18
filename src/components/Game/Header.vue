@@ -104,4 +104,7 @@ export default {
         }
     }
 }
+.suchWow .play-header {
+  animation: noiceBorderColor .5s linear 0s infinite;
+}
 </style>

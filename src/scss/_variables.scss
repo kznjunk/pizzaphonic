@@ -35,11 +35,16 @@ body {
     background-color: $main-background-color;
 }
 
-a {
+footer a {
     color: $red-color;
     text-decoration: underline;
 }
-
+.suchWow footer a {
+    animation: noiceColor .5s linear 0s infinite;
+}
+.suchWow {
+    cursor: crosshair;
+}
 .menu-title {
     color: $blue-color;
     text-decoration: underline;
@@ -52,4 +57,43 @@ a {
 .font-akaya {
   font-size: 22px;
   font-family: "Akaya Telivigala";
+}
+
+.suchWow {
+    animation: noiceColor .5s linear 0s infinite;
+}
+
+@keyframes noiceColor {
+  0% {
+    color: #6666ff;
+  }
+  25% {
+    color: #0099ff;
+  }
+  50% {
+    color: #00ff00;
+  }
+  75% {
+    color: #ff3399;
+  }
+  100% {
+    color: #6666ff;
+  }
+}
+@keyframes noiceBorderColor {
+  0% {
+    border-color: #6666ff;
+  }
+  25% {
+    border-color: #0099ff;
+  }
+  50% {
+    border-color: #00ff00;
+  }
+  75% {
+    border-color: #ff3399;
+  }
+  100% {
+    border-color: #6666ff;
+  }
 }

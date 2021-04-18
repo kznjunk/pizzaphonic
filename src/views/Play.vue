@@ -55,7 +55,7 @@ export default {
     return {
       rounds: null,
       sounds: null,
-      secrets: [ false, false, false ],
+      secrets: [ false ],
       user: {
         score: 0,
         life: 5,
@@ -66,6 +66,8 @@ export default {
         pseudo: null
       },
       loading: {
+        title: null,
+        unlockedRound: 1,
         isFirst: true,
         enable: true,
         from: 0,
@@ -150,14 +152,14 @@ export default {
               const data = response.data
               const answerData = data && data.answerData
               const gameData = data && data.gameData
-console.log('-- bwop')
-console.log(answerData)
-console.log(gameData)
-              if (answerData && gameData) {
-                this.$set(this.secrets, 2, 'bwop')
-                console.log(this.secrets)
+              const shData = data && data.shData
 
-                this.handleGoodAnswer(answerData, gameData)
+              if (answerData && gameData) {
+                this.handleGoodAnswerAndNewRound(answerData, gameData)
+              } else if (answerData && shData) {
+                this.handleGoodAnswerAndSecret(answerData, shData)
+              } else if (answerData) {
+                this.handleGoodAnswer(answerData)
               } else {
                 this.handleWrongAnswer()
               }
@@ -168,7 +170,20 @@ console.log(gameData)
         }
       })
     },
-    handleGoodAnswer (answerData, gameData) {
+    handleGoodAnswer (answerData) {
+      const { id, name, imgUrl } = answerData
+      const folderName = `${this.user.activeRound}-${this.rounds[this.user.activeRound - 1]['folderName']}`
+      const imageUrl = getImage(folderName, imgUrl)
+      this.user.score++
+
+      this.showGoodAnswerLightbox(imageUrl)
+      this.addImageInBubble(id, imageUrl)
+    },
+    handleGoodAnswerAndSecret (answerData, shData) {
+      this.handleGoodAnswer(answerData)
+      this.$set(this.secrets, shData.index, shData.url)
+    },
+    handleGoodAnswerAndNewRound (answerData, gameData) {
       const { id, name, imgUrl } = answerData
       const { round, sounds } = gameData
       const folderName = `${this.user.activeRound}-${this.rounds[this.user.activeRound - 1]['folderName']}`
@@ -202,12 +217,15 @@ console.log(gameData)
         }, 3000)
     },
     async unlockNextRound(round, sounds) {
-      this.lightbox.title = 'You unlocked a new round!'
+      const titles = this.play.loading.titles
+      const titleIndex = Math.floor(Math.random() * titles.length)
 
+      this.loading.title = titles[titleIndex]
       this.loading.current = 0
       this.loading.enable = true
       this.rounds.push(round)
       this.sounds.push(sounds)
+      this.loading.unlockedRound = this.rounds.length
 
       const folderName = `${this.rounds.length}-${round.folderName}`
       const sndsToPreload = sounds.map(snd => getSound(folderName, snd.soundFileName))
@@ -238,7 +256,9 @@ console.log(gameData)
       return safetyLeave
     },
     showSecret () {
-      console.log('yay!')
+      const body = document.body
+      body.classList.add('suchWow')
+      EventBus.$emit('party-hard')
     }
   },
   beforeRouteLeave(to, from, next) {

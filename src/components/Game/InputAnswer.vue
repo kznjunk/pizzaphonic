@@ -86,5 +86,11 @@ export default {
   border: 1px solid $blue-color;
   background-color: transparent;
 }
-
+.suchWow .send-answer-button,
+.suchWow #inputAnswer > div input {
+  animation: noiceColor .5s linear 0s infinite, noiceBorderColor .5s linear 0s infinite;
+}
+.suchWow #inputAnswer > div input::placeholder {
+  animation: noiceColor .5s linear 0s infinite;
+}
 </style>
