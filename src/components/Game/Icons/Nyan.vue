@@ -27,8 +27,11 @@ export default {
       document.addEventListener('click, touch', this.explose)
 
       window.setTimeout(() => {
-          this.byeBye()
+            this.byeBye()
       }, 10000)
+  },
+  destroyed() {
+    document.removeEventListener('click, touch', this.explose)
   },
   methods: {
     explode () {
@@ -39,8 +42,8 @@ export default {
         return Math.floor(Math.random() * max)
     },
     byeBye () {
-      this.$destroy()
-      this.$el.parentNode.removeChild(this.$el)
+        this.$destroy()
+        this.$el.parentNode.removeChild(this.$el)
     }
   }
 }

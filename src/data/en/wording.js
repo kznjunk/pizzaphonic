@@ -9,7 +9,7 @@ export default {
         title: 'How to play:',
         r1: 'Click on the circles',
         r2: 'Listen to the sounds',
-        r3: 'Guess and type the game\'s name..',
+        r3: 'Guess and type the game\'s names..',
         r4: '.. and find them all!',
         tips: 'Tips:',
         t1: 'You have 5 lifes',
@@ -49,7 +49,6 @@ export default {
             tips: [
                 'Did you know: this page is a loading page.',
                 'Tip: tips might appear over here.',
-                'Did you know: nothing Jon Snow',
                 'Did you know: you can change the round using the arrows',
                 'Score 42 to unlock the secret key!'
             ]
@@ -66,7 +65,7 @@ export default {
                 'Fantastic!',
                 'Try not. Do, or do not. There is no try.',
                 'Worst. Episode. Ever.',
-                'This is the way!' // need more
+                'This is the way!'
             ]
         },
         fail: {

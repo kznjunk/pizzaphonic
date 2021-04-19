@@ -63,7 +63,8 @@ export default {
         hasSeenNextRound: false,
         answers: [ ],
         email: null,
-        pseudo: null
+        pseudo: null,
+        userK: 0
       },
       loading: {
         title: null,
@@ -91,10 +92,9 @@ export default {
 
     const sndsToPreload = this.gameData.sounds.map(snd => getSound('1-popular', snd.soundFileName))
     const imgsToPreload = [
-      // require('@/assets/lifeY.png'),
-      // require('@/assets/lifeN.png'),
-      // require('@/assets/bg.jpg')
+      window.screen.width >= 681 ? require('@/assets/bg.jpg') : require('@/assets/bg-m.png')
     ]
+
     const itemsToPreload = sndsToPreload.concat(imgsToPreload)
 
     this.preloadItems(itemsToPreload)
@@ -127,8 +127,6 @@ export default {
     },
     updateLoadingScreen () {
       this.loading.current = this.loading.current + 12.5
-      // this.loadingScreenStep++
-      // this.loadingScreenProgress = 
     },
     listenActiveRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
@@ -143,7 +141,8 @@ export default {
             userAnswer,
             userScore: this.user.score,
             currentRound: this.user.activeRound,
-            userToken: this.token
+            userToken: this.token,
+            userK: this.user.userK
           }
 
           axios
@@ -209,7 +208,6 @@ export default {
       const titles = this.play.success.titles
       const titleIndex = Math.floor(Math.random() * titles.length)
       this.lightbox.title = titles[titleIndex]
-      // this.lightbox.image = imageUrl
       this.lightbox.enable = true
 
         window.setTimeout(() => {
@@ -258,6 +256,7 @@ export default {
     showSecret () {
       const body = document.body
       body.classList.add('suchWow')
+      this.user.userK = 1
       EventBus.$emit('party-hard')
     }
   },
@@ -271,6 +270,10 @@ export default {
     }
 
     next()
+  },
+  destroyed() {
+    const body = document.body
+    body.classList.remove('suchWow')
   },
   computed: {
     ...mapState({

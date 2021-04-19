@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// <img v-if="user.life < 1" src="@/assets/empty-box.png" alt="" />
 import { mapState } from 'vuex'
 import ButtonMenu from "@/components/Home/ButtonMenu.vue"
 
@@ -57,7 +56,6 @@ export default {
   z-index: 4;
   max-width: 400px;
   padding: 10px 20px;
-
   img {
     width: 100px;
   }

@@ -25,8 +25,9 @@ export default {
   },
   data: function(){
     return {
+      tipIndex: null,
       index: null,
-      wipMessage: '',
+      wipMessage: ''
     }
   },
   created() {

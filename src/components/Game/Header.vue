@@ -41,8 +41,6 @@ export default {
     sounds: Array,
     user: Object,
     secrets: Array
-  },
-  created () {
   }
 }
 </script>

@@ -68,11 +68,9 @@ export default {
   align-items: center;
   display: inline-flex;
   justify-content: center;
-
   cursor: pointer;
   background-color: rgba(28, 28, 28, 0.9);
   filter: blur(0px);
-
   img {
     width: 100%;
     height: 100%;
@@ -99,7 +97,6 @@ export default {
   height: 50px;
   border: 2px solid $red-color;
 }
-
 @media screen and (max-width: 1000px) {
   .pizza {
     margin: 10px;
@@ -122,7 +119,6 @@ export default {
     width: 75%;
   }
 }
-
 .suchWow .pizza {
   animation: noiceBorderColor .5s linear 0s infinite;
 }

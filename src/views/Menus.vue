@@ -1,7 +1,6 @@
 <template>
   <div class="menus">
     <Header />
-
     <div class="menu-content">
         <router-view />
     </div>

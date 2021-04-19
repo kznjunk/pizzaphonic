@@ -94,17 +94,14 @@ export default {
 .arrow-prev {
     transform: rotate(180deg);
 }
-
 @media screen and (max-width: 1000px) {
     .round-name {
         margin: 0px 15px;
     }
 }
-
 .blink-blink {
   animation: blink-blink 1s linear infinite;
 }
-
 @keyframes blink-blink {
   50% {
     opacity: 0;

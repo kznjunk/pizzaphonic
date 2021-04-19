@@ -1,12 +1,12 @@
 <template>
-    <div class="lifes" v-bind:class="{ 'shake-shake': shouldShake }">
-        <img
-            v-for="i in maxLife" :key="i"
-            :src="require(userLife >= i ? '@/assets/lifeY.png' : '@/assets/lifeN.png')"
-            alt="life"
-            rel="preload"
-        />
-    </div>
+  <div class="lifes" v-bind:class="{ 'shake-shake': shouldShake }">
+    <img
+      v-for="i in maxLife" :key="i"
+      :src="require(userLife >= i ? '@/assets/lifeY.png' : '@/assets/lifeN.png')"
+      alt="life"
+      rel="preload"
+    />
+  </div>
 </template>
 
 <script>

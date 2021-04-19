@@ -12,7 +12,7 @@ module.exports = {
     devServer: {
         port: 82,
         proxy: 'http://localhost:3000',
-        public: 'http://dev.pizzaphonic.com/',
+        public: 'http://pizzaphonic.com/',
         disableHostCheck: true
     }
 }

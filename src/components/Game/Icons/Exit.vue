@@ -1,7 +1,7 @@
 <template>
-    <router-link :to="target">
-        ✕
-    </router-link>
+  <router-link :to="target">
+    ✕
+  </router-link>
 </template>
 
 <script>
@@ -18,7 +18,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 30px;
   height: 30px;
   font-size: 20px;

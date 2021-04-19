@@ -13,7 +13,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(userData, index) in usersData">
+                    <tr
+                      v-for="(userData, index) in usersData"
+                      v-bind:class="[`ohh-${userData.isK}`]"
+                    >
                         <td>{{ index + 1 }}</td>
                         <td
                             :title="userData.countryCode || leaderboard.farFarAwayTitle"
@@ -56,9 +59,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
-        // this.errored = true
       })
-      // .finally(() => this.loading = false)
   },
   computed: {
     ...mapState({
@@ -122,6 +123,9 @@ export default {
     table th:nth-child(4),
     table td:nth-child(4) {
         padding-right: 25px;
+    }
+    .ohh-1 {
+      animation: noiceColor .5s linear 0s infinite;
     }
 }
 </style>
