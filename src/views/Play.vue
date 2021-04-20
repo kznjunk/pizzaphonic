@@ -74,7 +74,8 @@ export default {
         from: 0,
         to: 100,
         current: 0,
-        ready: false
+        ready: false,
+        stepSize: 0
       },
       lightbox: {
         enable: false,
@@ -119,6 +120,7 @@ export default {
       }
     },
     async preloadItems (items) {
+      this.loading.stepSize = (1 / items.length) * 100
       await preload(items, { cb_foreach: this.updateLoadingScreen })
 
       window.setTimeout(() => {
@@ -126,7 +128,7 @@ export default {
       }, 2000)
     },
     updateLoadingScreen () {
-      this.loading.current = this.loading.current + 12.5
+      this.loading.current = this.loading.current + this.loading.stepSize // + 12.5
     },
     listenActiveRound () {
       EventBus.$on('roundChanged', ({ currentRound }) => {
