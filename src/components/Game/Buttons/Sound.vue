@@ -6,6 +6,7 @@
       v-bind:class="{ 'active': currentRound === i + 1 }"
     >
       <div
+        tabindex="0"
         v-for="(sound, j) in soundsRound"
         :class="`pizza ${sound.level}`"
         :data-id="sound.id"

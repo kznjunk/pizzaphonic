@@ -40,45 +40,66 @@ export default {
             titles: [
                 'You unlocked a new round!',
                 'Next round is there!',
-                'Nice one! New songs for you',
-                'Yay! Check out this new round',
-                'Next round has been done for you'
+                'Yay! Check out this new round!',
+                'Next round has been made for you!',
+                'New round, new sounds!',
+                'Nice one! Here some fresh sounds for you!',
+                'Have a look to these latest sounds!'
             ],
             wip: 'Loading level {{x}}',
             done: 'Ready',
             tips: [
-                'Did you know: this page is a loading page.',
+                'Did you know? this page is a loading page.',
+                'Did you know? Score 42 to unlock the secret key!',
+                'Did you know? A legend said "cats might appear at some point..."',
+                'Did you know? Cookies are not allowed on this website',
+                'Did you know? If you think there is a bug, then it is a feature.',
+                'Did you know? Check Norris approves this game',
+                'Tip: play with your pseudo so you might appear in the leaderboard!',
                 'Tip: tips might appear over here.',
-                'Did you know: you can change the round using the arrows',
-                'Score 42 to unlock the secret key!'
+                'Tip: you can change the current round by using the arrows',
+                'Tip: smaller is a circle, harder is the sound to guess',
+                'Tip: colors indicate more or less the difficulty',
+                'Tip: drink water',
+                'Life tip: Don\'t be a cunt',
+                'Life tip: You are handsome <3'
             ]
         },
         success: {
             titles: [
                 'Nice one!',
                 'Easy one!',
-                'Annnnd another one!',
-                'Stop cheating!',
-                'Do you even know this game?',
-                'Great Scott!',
-                'To infinity and beyond!',
                 'Fantastic!',
-                'Try not. Do, or do not. There is no try.',
-                'Worst. Episode. Ever.',
-                'This is the way!'
+                'Good job!',
+                'Super!',
+                'Perfect!',
+                'Unstoppable!',
+                'Godlike!',
+                'Mama mia!',
+                'It’s super effective!',
+                'This is the way!',
+                'You are the one!',
+                'Annnnnnd another one!',
+                'To infinity and beyond!',
+                'You found it!',
+                'LEEEEEEEROY JENKIIIIIINS',
+                'Stop cheating!',
+                'Worst. Game. Ever.',
+                'Do you even know this game?',
+                'Don\'t you have something more important to do right now?!'
             ]
         },
         fail: {
             titles: [
                 '- Game Over -',
-                '- You died -',
+                '- YOU DIED -',
                 '- Wasted -',
-                '- Time... to die -'
+                '- You have died of dysentery -'
             ],
             subTitles: {
                 0: [
-                    'Hmm, at least you tried: {{x}}',
-                    'You scored {{x}}, is it also your age?',
+                    'Hmmm.. at least you tried: {{x}}',
+                    'You scored {{x}}, is it also your age?'
                 ],
                 1: [
                     'Really - not - impressive score: {{x}}',
@@ -86,28 +107,28 @@ export default {
                 ],
                 2: [
                     'Maybe you should try to cheat: {{x}}',
-                    'Even my gradma can do better: {{x}}'
+                    'Even my grandma can do better: {{x}}'
                 ],
                 3: [
-                    'You\'ll be back: {{x}}',
+                    'Houston, we have a problem: {{x}}'
                 ],
                 4: [
-                    'Houston, we have a problem. {{x}}',
+                    'You can do better: {{x}}'
                 ],
                 5: [
-                    'Why so serious? {{x}}',
+                    'You should write that on your resume: {{x}}'
                 ],
                 6: [
-                    'After so many tries, you scored: {{x}}'
+                    'Nice! After 108 tries you scored: {{x}}'
                 ],
                 7: [
-                    'The Force was with you: {{x}}'
+                    'The Force is with you: {{x}}'
                 ],
                 8: [
                     'Did you found the answers on Reddit? {{x}}'
                 ],
                 9: [
-                    'Are you the developer of this game? {{x}}'
+                    'You are the One. {{x}}'
                 ]
             }
         }

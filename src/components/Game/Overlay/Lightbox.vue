@@ -37,7 +37,7 @@ export default {
       })
     },
     tweetScore () {
-      const href = `https://twitter.com/intent/tweet?text=@kibwashere, YAY!!%20I%20scored%20${this.user.score}%20♪%20on%20%23pizzaphonic`
+      const href = `https://twitter.com/intent/tweet?text=@pizzaphonic, YAY!!%20I%20scored%20${this.user.score}%20♪%20on%20%23pizzaphonic!%20#pizzaphonic`
       window.open(href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600')
 
       return false
